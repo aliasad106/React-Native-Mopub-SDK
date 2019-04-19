@@ -15,8 +15,10 @@
 ```
 pod init
 ```
-2. It will create Podfile in your project, open it and paste the following lines below `target 'PROJECT_NAME' do`.
+2. It will create Podfile in your project, open it and paste the following lines below 
 ```
+`target 'PROJECT_NAME' do`.
+
 pod 'React', :path => '../node_modules/react-native', :subspecs => [
 'Core',
 'CxxBridge', # Include this for RN >= 0.47
@@ -34,8 +36,9 @@ pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-po
 pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
 pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 pod 'react-native-mopub-sdk', path: '../node_modules/react-native-mopub-sdk'
+end
 ```
-`end
+
 
 3. Then run the following command in termainal in the same location
 ```
