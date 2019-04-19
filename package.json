@@ -1,0 +1,36 @@
+{
+  "name": "react-native-mopub-sdk",
+  "title": "React Native Mopub Sdk",
+  "version": "1.0.0",
+  "description": "this is mopub react native library",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aliasad106/React-Native-Mopub-SDK",
+    "baseUrl": "https://github.com/aliasad106/React-Native-Mopub-SDK"
+  },
+  "keywords": [
+    "react-native"
+  ],
+  "author": {
+    "name": "Your Name",
+    "email": "yourname@email.com"
+  },
+  "license": "Apache-2.0",
+  "licenseFilename": "LICENSE",
+  "readmeFilename": "README.md",
+  "peerDependencies": {
+    "react": "16.2.0",
+    "react-native": "^0.52.0",
+    "react-native-windows": "0.52.0"
+  },
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.53.1",
+    "react": "16.2.0",
+    "react-native": "^0.52.0",
+    "react-native-windows": "0.52.0"
+  }
+}
