@@ -1,24 +1,24 @@
-import {NativeModules, NativeEventEmitter} from 'react-native';
+import { NativeEventEmitter, NativeModules } from "react-native";
 const { RNMoPubInterstitial } = NativeModules;
 
 export interface IRNMoPubInterstitial {
+    addEventListener: (eventType: string, listener: () => void) => void;
     initializeInterstitialAd: (adUnitId: string) => void;
     loadAd: () => void;
-    setKeywords: (keywords: string) => void;
-    isReady: () => Promise<void>;
-    show: () => void;
-    addEventListener: (eventType: string, listener: () => void) => void;
+    isReady: () => Promise<boolean>;
     removeAllListeners: (eventType: string) => void;
-}
-
+    setKeywords: (keywords: string) => void;
+    show: () => void;
+  }
+  
 const emitter = new NativeEventEmitter(RNMoPubInterstitial);
 
-module.exports = {
+export default {
+    addEventListener: (eventType: string, listener: () => void)  => emitter.addListener(eventType, listener),
     initializeInterstitialAd: (adUnitId: string) => RNMoPubInterstitial.initializeInterstitialAd(adUnitId),
+    isReady: (): Promise<boolean> => RNMoPubInterstitial.isReady(),
     loadAd: () => RNMoPubInterstitial.loadAd(),
+    removeAllListeners: (eventType: string) => emitter.removeAllListeners(eventType),
     setKeywords: (keywords: string) => RNMoPubInterstitial.setKeywords(keywords),
-    isReady: (): Promise => RNMoPubInterstitial.isReady(),
     show: () => RNMoPubInterstitial.show(),
-    addEventListener: (eventType: string, listener: Function)  => emitter.addListener(eventType, listener),
-    removeAllListeners: (eventType: string) => emitter.removeAllListeners(eventType)
-};
+} as IRNMoPubInterstitial;
