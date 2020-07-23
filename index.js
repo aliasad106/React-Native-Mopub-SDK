@@ -3,7 +3,7 @@ import MoPubBanner from './src/MoPubBanner';
 import RNMoPubRewardedVideo from './src/RNMoPubRewardedVideo';
 import RNNativeAdView from './src/RNNativeAdView'
 
-export default {
+module.exports = {
     RNMoPubInterstitial,
     MoPubBanner,
     RNMoPubRewardedVideo,
