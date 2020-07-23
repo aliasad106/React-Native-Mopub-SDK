@@ -6,6 +6,8 @@
 //
 
 #import "AdLibSDK.h"
+#import "MoPub.h"
+#import "MPMoPubConfiguration.h"
 
 @implementation AdLibSDK
 

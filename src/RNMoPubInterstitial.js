@@ -1,6 +1,15 @@
 import {NativeModules, NativeEventEmitter} from 'react-native';
 const { RNMoPubInterstitial } = NativeModules;
 
+export interface IRNMoPubInterstitial {
+    initializeInterstitialAd: (adUnitId: string) => void;
+    loadAd: () => void;
+    setKeywords: (keywords: string) => void;
+    isReady: () => Promise<void>;
+    show: () => void;
+    addEventListener: (eventType: string, listener: () => void) => void;
+    removeAllListeners: (eventType: string) => void;
+}
 
 const emitter = new NativeEventEmitter(RNMoPubInterstitial);
 

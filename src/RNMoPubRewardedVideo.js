@@ -1,6 +1,15 @@
 import {NativeModules, NativeEventEmitter} from 'react-native';
 const { RNMoPubRewardedVideo } = NativeModules;
 
+export interface IRNMoPubRewardedVideo {
+    initializeSdkForRewardedVideoAd: (adUnitId: string) => void;
+    loadRewardedVideoAdWithAdUnitID: (adUnitId: string) => void;
+    presentRewardedVideoAdForAdUnitID: (adUnitId: string, currencyType:string, amount: number, promise:()=>{}) => void;
+    availableRewardsForAdUnitID: (adUnitId:string, promise:()=>{}) => void;
+    hasAdAvailableForAdUnitID: (adUnitId:string, promise:()=>{}) => void;
+    addEventListener: (eventType: string, listener: () => void) => void;
+    removeAllListeners: (eventType: string) => void;
+}
 
 const emitter = new NativeEventEmitter(RNMoPubRewardedVideo);
 

@@ -1,5 +1,10 @@
 package com.reactlibrary;
 
+import android.util.Log;
+import javax.annotation.Nullable;
+import androidx.annotation.NonNull;
+import org.json.JSONException;
+
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.LifecycleEventListener;
 import com.facebook.react.bridge.Promise;
@@ -11,8 +16,9 @@ import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubInterstitial;
-
-import javax.annotation.Nullable;
+import com.mopub.network.ImpressionData;
+import com.mopub.network.ImpressionsEmitter;
+import com.mopub.network.ImpressionListener;
 
 /**
  * Created by usamaazam on 29/03/2019.
@@ -25,8 +31,11 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
     public static final String EVENT_CLICKED = "onClicked";
     public static final String EVENT_SHOWN = "onShown";
     public static final String EVENT_DISMISSED = "onDismissed";
+    public static final String EVENT_TRACK_IMPRESSION_DATA = "onTrackImpressionData";
 
     private MoPubInterstitial mInterstitial;
+    private ImpressionListener mImpressionListener;
+
     ReactApplicationContext mReactContext;
 
     public RNMoPubInterstitialModule(ReactApplicationContext reactContext) {
@@ -46,6 +55,33 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
         mInterstitial = new MoPubInterstitial(getCurrentActivity(), adUnitId);
         mInterstitial.setInterstitialAdListener(this);
 
+        mImpressionListener = new ImpressionListener() {
+            @Override
+            public void onImpression(@NonNull final String adUnitId, @Nullable final ImpressionData impressionData) {
+                Log.i("ILRD", "impression for adUnitId= " + adUnitId);
+                WritableMap event = Arguments.createMap();
+
+                if (impressionData == null) {
+                    // impression data is not available, write warning to LogCat
+                    Log.w("ILRD", "impression data not available for adUnitId= " + adUnitId);
+                    event.putString("impressionData", "");
+                } else {
+                    try {
+                        // impression data is available, process it here
+                        Log.i("ILRD", "impression data adUnitId= " + adUnitId + "data=\n" + impressionData.getJsonRepresentation().toString(2));
+                        
+                        event.putString("impressionData", impressionData.getJsonRepresentation().toString(2));
+                    } catch (JSONException e) {
+                        Log.e("ILRD", "Can't format impression data. e=" + e.toString() );
+                        event.putString("error", "Can't format impression data: "+ e.toString());
+                    }
+                }
+                sendEvent(EVENT_TRACK_IMPRESSION_DATA, event);
+            }
+        };
+
+        // subscribe to start listening for impression data
+        ImpressionsEmitter.addListener(mImpressionListener);
     }
 
     @ReactMethod
@@ -127,6 +163,10 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
 
     @Override
     public void onHostDestroy() {
+        if (mImpressionListener != null) {
+            ImpressionsEmitter.removeListener(mImpressionListener);
+            mImpressionListener = null;
+        }
         if (mInterstitial != null)
             mInterstitial.destroy();
     }

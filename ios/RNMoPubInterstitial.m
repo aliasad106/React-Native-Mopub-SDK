@@ -14,8 +14,9 @@ RCT_EXPORT_MODULE();
              @"onFailed",
              @"onShown",
              @"onDismissed",
-             @"onClicked"
-             ];
+             @"onClicked",
+             @"onTrackImpressionData"
+            ];
 }
 
 
@@ -90,6 +91,18 @@ RCT_EXPORT_METHOD(show) {
 - (void)interstitialDidReceiveTapEvent:(MPInterstitialAdController *)interstitial {
     RCTLog(@"onClicked");
     [self sendEventWithName:@"onClicked" body:nil];
+}
+
+- (void)mopubAd:(id<MPMoPubAd>)ad didTrackImpressionWithImpressionData:(MPImpressionData * _Nullable)impressionData
+{
+    RCTLog(@"onTrackImpressionData");
+
+    if (impressionData == nil)
+    {
+            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": @""}];
+    } else {
+            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": [impressionData jsonRepresentation]}];
+    }
 }
 
 
