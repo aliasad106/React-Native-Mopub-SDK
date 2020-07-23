@@ -6,12 +6,9 @@
 //
 
 #import "RNMoPubRewardedVideo.h"
-#import <AdColonyGlobalMediationSettings.h>
-#import <MPGoogleGlobalMediationSettings.h>
-#import <TapjoyGlobalMediationSettings.h>
-#import <VungleInstanceMediationSettings.h>
 #import "MPRewardedVideo.h"
 #import "AdLibSDK.h"
+
 @implementation RNMoPubRewardedVideo
 
 RCT_EXPORT_MODULE();

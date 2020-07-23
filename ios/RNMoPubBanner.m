@@ -6,11 +6,8 @@
 //
 
 #import "RNMoPubBanner.h"
-#import <AdColonyGlobalMediationSettings.h>
-#import <MPGoogleGlobalMediationSettings.h>
-#import <TapjoyGlobalMediationSettings.h>
-#import <VungleInstanceMediationSettings.h>
 #import "AdLibSDK.h"
+
 @implementation RNMoPubBanner
 
 @synthesize adUnitId = _adUnitId;
