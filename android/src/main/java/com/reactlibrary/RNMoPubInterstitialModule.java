@@ -74,6 +74,7 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
                     } catch (JSONException e) {
                         Log.e("ILRD", "Can't format impression data. e=" + e.toString() );
                         event.putString("error", "Can't format impression data: "+ e.toString());
+                        event.putString("impressionData", "");
                     }
                 }
                 sendEvent(EVENT_TRACK_IMPRESSION_DATA, event);
