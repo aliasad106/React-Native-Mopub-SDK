@@ -1,5 +1,6 @@
 package com.reactlibrary;
 
+import android.app.Activity;
 import android.util.Log;
 import javax.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -109,9 +110,15 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
 
     @ReactMethod
     public void show() {
-        if (mInterstitial != null) {
-            mInterstitial.show();
-        }
+        final Activity activity = getCurrentActivity();
+
+        activity.runOnUiThread(new Runnable() {
+            @Override public void run() {
+                if (mInterstitial != null) {
+                    mInterstitial.show();
+                }
+            }
+        });
     }
 
     @ReactMethod
