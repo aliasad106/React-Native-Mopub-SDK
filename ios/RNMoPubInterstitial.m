@@ -101,7 +101,9 @@ RCT_EXPORT_METHOD(show) {
     {
             [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": @""}];
     } else {
-            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": [impressionData jsonRepresentation]}];
+            NSError *jsonSerializationError = nil;
+            NSObject *impressionObject = [NSJSONSerialization JSONObjectWithData:impressionData.jsonRepresentation options:0 error:&jsonSerializationError];
+            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": impressionObject}];
     }
 }
 
