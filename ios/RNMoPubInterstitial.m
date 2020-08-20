@@ -1,7 +1,9 @@
 
 #import "RNMoPubInterstitial.h"
 #import <React/RCTLog.h>
-#import "AdLibSDK.h"
+
+#import "MoPub.h"
+#import "MPMoPubConfiguration.h"
 
 @implementation RNMoPubInterstitial
 
@@ -15,7 +17,8 @@ RCT_EXPORT_MODULE();
              @"onShown",
              @"onDismissed",
              @"onClicked",
-             @"onTrackImpressionData"
+             @"onTrackImpressionData",
+             @"onSDKInitialized"
             ];
 }
 
@@ -29,8 +32,12 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(initializeInterstitialAd:(NSString *)unitId)
 {
-    
-    [AdLibSDK initializeAdSDK:unitId];
+    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:unitId];
+    sdkConfig.loggingLevel = MPBLogLevelDebug;
+    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
+        RCTLog(@"SDK initialized");
+    [self sendEventWithName:@"onSDKInitialized" body:nil];
+    }];
     RCTLog(@"Mopub Initialized from Library!");
     self.interstitial = [MPInterstitialAdController interstitialAdControllerForAdUnitId:unitId];
     self.interstitial.delegate = self;

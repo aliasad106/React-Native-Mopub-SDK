@@ -1,9 +1,10 @@
 package com.reactlibrary;
 
 import android.app.Activity;
+import android.os.Handler;
 import android.util.Log;
-import javax.annotation.Nullable;
 import androidx.annotation.NonNull;
+import javax.annotation.Nullable;
 import org.json.JSONException;
 
 import com.facebook.react.bridge.Arguments;
@@ -15,6 +16,10 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
+import com.mopub.common.logging.MoPubLog;
+import com.mopub.common.MoPub;
+import com.mopub.common.SdkConfiguration;
+import com.mopub.common.SdkInitializationListener;
 import com.mopub.mobileads.MoPubErrorCode;
 import com.mopub.mobileads.MoPubInterstitial;
 import com.mopub.network.ImpressionData;
@@ -33,6 +38,7 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
     public static final String EVENT_SHOWN = "onShown";
     public static final String EVENT_DISMISSED = "onDismissed";
     public static final String EVENT_TRACK_IMPRESSION_DATA = "onTrackImpressionData";
+    public static final String EVENT_SDK_INITIALIZED = "onSDKInitialized";
 
     private MoPubInterstitial mInterstitial;
     private ImpressionListener mImpressionListener;
@@ -49,10 +55,44 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
         return "RNMoPubInterstitial";
     }
 
+    public void initSDK(final String adUnitId) {
+        Log.i("Mopub SDK", "Initialization...");
+
+        Handler mainHandler = new Handler(getCurrentActivity().getMainLooper());
+
+        Runnable myRunnable = new Runnable() {
+            @Override
+            public void run() {
+
+                SdkConfiguration sdkConfiguration = new SdkConfiguration.Builder(adUnitId)
+                        .withLogLevel(MoPubLog.LogLevel.DEBUG)
+                        .withLegitimateInterestAllowed(false)
+                        .build();
+
+                MoPub.initializeSdk(getCurrentActivity(), sdkConfiguration, initSdkListener());
+
+            }
+
+            private SdkInitializationListener initSdkListener() {
+                Log.i("Mopub SDK", "Initialization listener");
+        
+                return new SdkInitializationListener() {
+                    @Override
+                    public void onInitializationFinished() {
+                        Log.i("Mopub SDK", "Initialization finished");
+                        sendEvent(EVENT_SDK_INITIALIZED, null);
+                    }
+                };
+            }
+        };
+        mainHandler.post(myRunnable);
+    }
+
     @ReactMethod
     public void initializeInterstitialAd(String adUnitId) {
 
-        AdLibSDK.initializeAdSDK(null,adUnitId, getCurrentActivity());
+        initSDK(adUnitId);
+
         mInterstitial = new MoPubInterstitial(getCurrentActivity(), adUnitId);
         mInterstitial.setInterstitialAdListener(this);
 
