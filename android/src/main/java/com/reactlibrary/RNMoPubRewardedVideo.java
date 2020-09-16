@@ -58,7 +58,7 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     @ReactMethod
     public void initializeSdkForRewardedVideoAd(String adUnitId) {
 
-        AdLibSDK.initializeAdSDK(null, adUnitId, mReactContext.getCurrentActivity());
+        // AdLibSDK.initializeAdSDK(null, adUnitId, mReactContext.getCurrentActivity());
 
     }
 

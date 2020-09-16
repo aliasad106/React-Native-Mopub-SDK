@@ -55,7 +55,8 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
         return "RNMoPubInterstitial";
     }
 
-    public void initializeInterstitial(final String adUnitId) {
+    @ReactMethod
+    public void initializeInterstitialAd(final String adUnitId) {
         Log.i("Mopub SDK", "Initializing interstitial");
 
         mInterstitial = new MoPubInterstitial(getCurrentActivity(), adUnitId);
@@ -89,40 +90,6 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
 
         // subscribe to start listening for impression data
         ImpressionsEmitter.addListener(mImpressionListener);
-    }
-
-    @ReactMethod
-    public void initializeInterstitialAd(final String adUnitId) {
-        Log.i("Mopub SDK", "Initialization...");
-
-        Handler mainHandler = new Handler(getCurrentActivity().getMainLooper());
-
-        Runnable myRunnable = new Runnable() {
-            @Override
-            public void run() {
-
-                SdkConfiguration sdkConfiguration = new SdkConfiguration.Builder(adUnitId)
-                        .withLogLevel(MoPubLog.LogLevel.DEBUG)
-                        .build();
-
-                MoPub.initializeSdk(getCurrentActivity(), sdkConfiguration, initSdkListener());
-
-            }
-
-            private SdkInitializationListener initSdkListener() {
-                Log.i("Mopub SDK", "Initialization listener");
-        
-                return new SdkInitializationListener() {
-                    @Override
-                    public void onInitializationFinished() {
-                        Log.i("Mopub SDK", "Initialization finished");
-                        initializeInterstitial(adUnitId);
-                        sendEvent(EVENT_SDK_INITIALIZED, null);
-                    }
-                };
-            }
-        };
-        mainHandler.post(myRunnable);
     }
 
     @ReactMethod

@@ -41,7 +41,7 @@ public class MoPubBannerManager extends SimpleViewManager<RNMoPubBanner> {
             view.setAdUnitId(adUnitId);
             view.loadAd();
         } else {
-            AdLibSDK.initializeAdSDK(view, adUnitId, rnMoPubBanner.mContext.getCurrentActivity());
+            // AdLibSDK.initializeAdSDK(view, adUnitId, rnMoPubBanner.mContext.getCurrentActivity());
         }
 
     }

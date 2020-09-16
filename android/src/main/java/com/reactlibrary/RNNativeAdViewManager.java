@@ -38,7 +38,7 @@ public class RNNativeAdViewManager extends ViewGroupManager<RNNativeAdView> {
     @ReactProp(name = "adUnitId")
     public void setUnitID(RNNativeAdView view, String adUnitId) {
         if (!MoPub.isSdkInitialized()) {
-            AdLibSDK.initializeAdSDK(null, adUnitId, rnNativeAdView.mContext.getCurrentActivity());
+            // AdLibSDK.initializeAdSDK(null, adUnitId, rnNativeAdView.mContext.getCurrentActivity());
         }
         view.initializeMopubNativeAd(adUnitId);
     }
