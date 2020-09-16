@@ -13,13 +13,20 @@
 
 RCT_EXPORT_MODULE();
 
+- (NSArray<NSString *> *)supportedEvents {
+    return @[
+             @"onSDKInitialized",
+            ];
+}
+
+
 RCT_EXPORT_METHOD(initializeSDK:(NSString *)unitID onComplete:(RCTResponseSenderBlock)onComplete) 
 {
     MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization: unitID];
     sdkConfig.loggingLevel = MPBLogLevelDebug;
     [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
         NSLog(@"SDK initialization complete");
-        onComplete(nil);
+        [self sendEventWithName:@"onSDKInitialized" body:nil];
     }];
 }
 
