@@ -51,6 +51,8 @@ allprojects {
 ## Usage
 
 ```javascript
+import { AdLidSDK, RNMoPubInterstitial } from 'react-native-mopub-sdk';
+
 function initializeAds(onInitialized: () => {}) {
     AdLibSDK.addEventListener("onSDKInitialized", () => {
         AdLibSDK.removeAllListeners("onSDKInitialized");
