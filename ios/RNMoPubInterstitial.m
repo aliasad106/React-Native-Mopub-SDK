@@ -18,7 +18,6 @@ RCT_EXPORT_MODULE();
              @"onDismissed",
              @"onClicked",
              @"onTrackImpressionData",
-             @"onSDKInitialized"
             ];
 }
 
@@ -28,17 +27,8 @@ RCT_EXPORT_MODULE();
     return dispatch_get_main_queue();
 }
 
-
-
 RCT_EXPORT_METHOD(initializeInterstitialAd:(NSString *)unitId)
 {
-    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization:unitId];
-    sdkConfig.loggingLevel = MPBLogLevelDebug;
-    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
-        RCTLog(@"SDK initialized");
-    [self sendEventWithName:@"onSDKInitialized" body:nil];
-    }];
-    RCTLog(@"Mopub Initialized from Library!");
     self.interstitial = [MPInterstitialAdController interstitialAdControllerForAdUnitId:unitId];
     self.interstitial.delegate = self;
     

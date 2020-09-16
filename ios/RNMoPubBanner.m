@@ -6,7 +6,6 @@
 //
 
 #import "RNMoPubBanner.h"
-#import "AdLibSDK.h"
 
 @implementation RNMoPubBanner
 
@@ -14,7 +13,6 @@
 
 - (id)initWithAdUnitId:(NSString *)adUnitId size:(CGSize)size {
     self = [super initWithAdUnitId:adUnitId size:size];
-    [AdLibSDK initializeAdSDK:adUnitId];
     if (self) {
         self.delegate = self;
     }

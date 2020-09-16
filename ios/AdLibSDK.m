@@ -11,11 +11,15 @@
 
 @implementation AdLibSDK
 
-+ (void)initializeAdSDK:(NSString *)unitID {    
+RCT_EXPORT_MODULE();
+
+RCT_EXPORT_METHOD(initializeSDK:(NSString *)unitID onComplete:(RCTResponseSenderBlock)onComplete) 
+{
     MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization: unitID];
     sdkConfig.loggingLevel = MPBLogLevelDebug;
     [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
         NSLog(@"SDK initialization complete");
+        onComplete(nil);
     }];
 }
 
