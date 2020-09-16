@@ -50,6 +50,24 @@ allprojects {
 
 ## Usage
 
+```javascript
+function initializeAds(onInitialized: () => {}) {
+    AdLibSDK.addEventListener("onSDKInitialized", () => {
+        AdLibSDK.removeAllListeners("onSDKInitialized");
+
+        // Initialize ad once Mopub SDK has been initialized
+        RNMoPubInterstitial.initializeInterstitialAd(
+            INTERSTITIAL_UNIT_ID
+        );
+
+        // Do other stuff like show an ad after initialization
+        onInitialized();
+    });
+    
+    AdLibSDK.init(INTERSTITIAL_UNIT_ID);
+}
+```
+
 ### Interstitial
 
 ```javascript
