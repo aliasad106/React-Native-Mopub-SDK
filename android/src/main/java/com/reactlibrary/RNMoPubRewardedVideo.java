@@ -100,8 +100,22 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void showRewardedVideoWithUnitID(String unitID) {
-        MoPubRewardedVideos.showRewardedVideo(unitID);
+    public void showRewardedVideoWithUnitID(String unitID, Callback onError) {
+        Boolean hasRewarded = MoPubRewardedVideos.hasRewardedVideo(unitID);
+        try {
+            JSONObject dictionary = new JSONObject();	
+
+            if (hasRewarded) {
+                MoPubRewardedVideos.showRewardedVideo(unitID);
+                dictionary.put("error", false);
+            } else {
+                dictionary.put("error", "Ad not found for this unit ID");
+            }
+            onError.invoke(dictionary.toString());
+        
+        } catch (Exception ex) {	
+            onError.invoke("Error with onError");	
+        }
     }
 
     @Override
