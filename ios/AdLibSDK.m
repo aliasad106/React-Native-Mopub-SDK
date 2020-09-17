@@ -20,7 +20,7 @@ RCT_EXPORT_MODULE();
 }
 
 
-RCT_EXPORT_METHOD(initializeSDK:(NSString *)unitID onComplete:(RCTResponseSenderBlock)onComplete) 
+RCT_EXPORT_METHOD(initializeSDK:(NSString *)unitID) 
 {
     MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization: unitID];
     sdkConfig.loggingLevel = MPBLogLevelDebug;

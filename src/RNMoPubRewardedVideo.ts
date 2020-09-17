@@ -6,7 +6,7 @@ export interface IRNMoPubRewardedVideo {
     initializeRewardedAd: () => void;
     loadRewardedVideoWithUnitID: (adUnitId: string) => void;
     removeAllListeners: (eventType: string) => void;
-    showRewardedVideoWithUnitID: (adUnitId: string) => void;
+    showRewardedVideoWithUnitID: (adUnitId: string, onError: ({error}: { error: any}) => void) => void;
 }
 
 const emitter = new NativeEventEmitter(RNMoPubRewardedVideo);
@@ -16,5 +16,5 @@ export default {
     initializeRewardedAd: () => RNMoPubRewardedVideo.initializeRewardedAd(),
     loadRewardedVideoWithUnitID: (adUnitId) => RNMoPubRewardedVideo.loadRewardedVideoWithUnitID(adUnitId),
     removeAllListeners: (eventType) => emitter.removeAllListeners(eventType),
-    showRewardedVideoWithUnitID: (adUnitId) => RNMoPubRewardedVideo.showRewardedVideoWithUnitID(adUnitId)
+    showRewardedVideoWithUnitID: (adUnitId, onError) => RNMoPubRewardedVideo.showRewardedVideoWithUnitID(adUnitId, onError)
 } as IRNMoPubRewardedVideo;

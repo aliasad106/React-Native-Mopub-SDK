@@ -1,12 +1,6 @@
-//
-//  RNMoPubRewardedVideo.m
-//  react-native-ad-lib
-//
-//  Created by Usama Azam on 28/03/2019.
-//
-
 #import "RNMoPubRewardedVideo.h"
 #import "MPRewardedVideo.h"
+#import <React/RCTLog.h>
 
 @implementation RNMoPubRewardedVideo
 
@@ -14,30 +8,43 @@ RCT_EXPORT_MODULE();
 
 - (NSArray<NSString *> *)supportedEvents {
     return @[
-             @"rewardedVideoAdDidLoadForAdUnitID",
-             @"rewardedVideoAdDidFailToLoadForAdUnitID",
-             @"rewardedVideoAdDidFailToPlayForAdUnitID",
+             @"onRewardedVideoLoadSuccess",
+             @"onRewardedVideoLoadFailure",
+             @"onRewardedVideoPlaybackError",
              @"rewardedVideoAdWillAppearForAdUnitID",
-             @"rewardedVideoAdDidAppearForAdUnitID",
+             @"onRewardedVideoStarted",
              @"rewardedVideoAdWillDisappearForAdUnitID",
-             @"rewardedVideoAdDidDisappearForAdUnitID",
-             @"rewardedVideoAdShouldRewardForAdUnitID",
+             @"onRewardedVideoClosed",
+             @"onRewardedVideoCompleted",
              @"rewardedVideoAdDidExpireForAdUnitID",
-             @"rewardedVideoAdDidReceiveTapEventForAdUnitID",
-             @"rewardedVideoAdWillLeaveApplicationForAdUnitID"
+             @"onRewardedVideoClicked",
+             @"rewardedVideoAdWillLeaveApplicationForAdUnitID",
+             @"onTrackImpressionData"
              ];
 }
 
 
-RCT_EXPORT_METHOD(loadRewardedVideoAdWithAdUnitID:(NSString *)unitId)
+RCT_EXPORT_METHOD(loadRewardedVideoWithUnitID:(NSString *)unitId)
 {
-    
     [MPRewardedVideo loadRewardedVideoAdWithAdUnitID:unitId withMediationSettings:@[]];
     [MPRewardedVideo setDelegate:self forAdUnitId:unitId];
-    
 }
 
-RCT_EXPORT_METHOD(initializeSdkForRewardedVideoAd:(NSString *)unitId) {
+RCT_EXPORT_METHOD(showRewardedVideoWithUnitID:(NSString *)unitId onError:(RCTResponseSenderBlock)onError)
+{
+    NSArray *rewardeds = [MPRewardedVideo availableRewardsForAdUnitID:unitId];
+
+    if ([rewardeds count] == 0) {
+        onError(@[@{@"error":@"Ad not found for this unit ID"}]);
+    } else {
+        onError(@[@{@"error": @NO}]);
+        UIViewController *vc = [UIApplication sharedApplication].delegate.window.rootViewController;
+        [MPRewardedVideo presentRewardedVideoAdForAdUnitID:unitId fromViewController:vc withReward:rewardeds[0] customData:@""];
+    }
+}
+
+RCT_EXPORT_METHOD(initializeRewardedAd) {
+    // Required to be iso Android
 }
 
 RCT_EXPORT_METHOD(presentRewardedVideoAdForAdUnitID:(NSString *) unitId currencyType:(NSString*)currencyType amount:(nonnull NSNumber*) amount callback:(RCTResponseSenderBlock)callback)
@@ -86,20 +93,20 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 {
     
     NSLog(@"video loaded successfully");
-    [self sendEventWithName:@"rewardedVideoAdDidLoadForAdUnitID" body:@{@"adUnitID": adUnitID}];
+    [self sendEventWithName:@"onRewardedVideoLoadSuccess" body:@{@"adUnitID": adUnitID}];
     
 }
 
 
 - (void)rewardedVideoAdDidFailToLoadForAdUnitID:(NSString *)adUnitID error:(NSError *)error
 {
-    [self sendEventWithName:@"rewardedVideoAdDidFailToLoadForAdUnitID" body:@{@"adUnitID": adUnitID, @"error":error}];
+    [self sendEventWithName:@"onRewardedVideoLoadFailure" body:@{@"adUnitID": adUnitID, @"error":error}];
     
 }
 
 - (void)rewardedVideoAdDidFailToPlayForAdUnitID:(NSString *)adUnitID error:(NSError *)error
 {
-    [self sendEventWithName:@"rewardedVideoAdDidFailToPlayForAdUnitID" body:@{@"adUnitID": adUnitID, @"error":error}];
+    [self sendEventWithName:@"onRewardedVideoPlaybackError" body:@{@"adUnitID": adUnitID, @"error":error}];
 }
 
 - (void)rewardedVideoAdWillAppearForAdUnitID:(NSString *)adUnitID {
@@ -107,7 +114,7 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 }
 
 - (void)rewardedVideoAdDidAppearForAdUnitID:(NSString *)adUnitID {
-     [self sendEventWithName:@"rewardedVideoAdDidAppearForAdUnitID"  body:@{@"adUnitID": adUnitID}];
+     [self sendEventWithName:@"onRewardedVideoStarted"  body:@{@"adUnitID": adUnitID}];
 }
 
 - (void)rewardedVideoAdWillDisappearForAdUnitID:(NSString *)adUnitID {
@@ -115,11 +122,11 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 }
 
 - (void)rewardedVideoAdDidDisappearForAdUnitID:(NSString *)adUnitID {
-     [self sendEventWithName:@"rewardedVideoAdDidDisappearForAdUnitID"  body:@{@"adUnitID": adUnitID}];
+     [self sendEventWithName:@"onRewardedVideoClosed"  body:@{@"adUnitID": adUnitID}];
 }
 
 - (void)rewardedVideoAdShouldRewardForAdUnitID:(NSString *)adUnitID reward:(MPRewardedVideoReward *)reward {
-     [self sendEventWithName:@"rewardedVideoAdShouldRewardForAdUnitID" body:nil];
+     [self sendEventWithName:@"onRewardedVideoCompleted" body:nil];
 }
 
 - (void)rewardedVideoAdDidExpireForAdUnitID:(NSString *)adUnitID {
@@ -127,11 +134,24 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 }
 
 - (void)rewardedVideoAdDidReceiveTapEventForAdUnitID:(NSString *)adUnitID {
-     [self sendEventWithName:@"rewardedVideoAdDidReceiveTapEventForAdUnitID" body:@{@"adUnitID": adUnitID}];
+     [self sendEventWithName:@"onRewardedVideoClicked" body:@{@"adUnitID": adUnitID}];
 }
 
 - (void)rewardedVideoAdWillLeaveApplicationForAdUnitID:(NSString *)adUnitID {
      [self sendEventWithName:@"rewardedVideoAdWillLeaveApplicationForAdUnitID" body:@{@"adUnitID": adUnitID}];
+}
+
+- (void)didTrackImpressionWithAdUnitID:(NSString *)adUnitID impressionData:(MPImpressionData *)impressionData {
+    RCTLog(@"onTrackImpressionData");
+
+    if (impressionData == nil)
+    {
+            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": @""}];
+    } else {
+            NSError *jsonSerializationError = nil;
+            NSObject *impressionObject = [NSJSONSerialization JSONObjectWithData:impressionData.jsonRepresentation options:0 error:&jsonSerializationError];
+            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": impressionObject}];
+    }
 }
 
 
