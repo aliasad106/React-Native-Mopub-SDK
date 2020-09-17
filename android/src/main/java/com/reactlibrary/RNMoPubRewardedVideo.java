@@ -48,7 +48,7 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     public static final String ON_REWARDED_VIDEO_CLOSED = "onRewardedVideoClosed";
     public static final String ON_REWARDED_VIDEO_COMPLETED = "onRewardedVideoCompleted";
     public static final String ON_REWARDED_VIDEO_CLICKED = "onRewardedVideoClicked";
-    public static final String EVENT_TRACK_IMPRESSION_DATA = "onTrackImpressionData";
+    public static final String EVENT_TRACK_IMPRESSION_DATA = "onRewardedTrackImpressionData";
 
     private ImpressionListener mImpressionListener;
 

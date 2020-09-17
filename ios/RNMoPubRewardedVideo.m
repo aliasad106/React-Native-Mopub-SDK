@@ -19,7 +19,7 @@ RCT_EXPORT_MODULE();
              @"rewardedVideoAdDidExpireForAdUnitID",
              @"onRewardedVideoClicked",
              @"rewardedVideoAdWillLeaveApplicationForAdUnitID",
-             @"onTrackImpressionData"
+             @"onRewardedTrackImpressionData"
              ];
 }
 
@@ -142,15 +142,15 @@ RCT_EXPORT_METHOD(availableRewardsForAdUnitID: (NSString *)unitId callback: (RCT
 }
 
 - (void)didTrackImpressionWithAdUnitID:(NSString *)adUnitID impressionData:(MPImpressionData *)impressionData {
-    RCTLog(@"onTrackImpressionData");
+    RCTLog(@"onRewardedTrackImpressionData");
 
     if (impressionData == nil)
     {
-            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": @""}];
+            [self sendEventWithName:@"onRewardedTrackImpressionData" body:@{@"impressionData": @""}];
     } else {
             NSError *jsonSerializationError = nil;
             NSObject *impressionObject = [NSJSONSerialization JSONObjectWithData:impressionData.jsonRepresentation options:0 error:&jsonSerializationError];
-            [self sendEventWithName:@"onTrackImpressionData" body:@{@"impressionData": impressionObject}];
+            [self sendEventWithName:@"onRewardedTrackImpressionData" body:@{@"impressionData": impressionObject}];
     }
 }
 
