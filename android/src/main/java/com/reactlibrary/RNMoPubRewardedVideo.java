@@ -1,5 +1,6 @@
 package com.reactlibrary;
 
+import android.app.Activity;
 import android.util.Log;
 import androidx.annotation.NonNull;
 import org.json.JSONException;
@@ -94,9 +95,16 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @ReactMethod
-    public void loadRewardedVideoWithUnitID(String unitID) {
-        MoPubRewardedVideos.loadRewardedVideo(unitID);
-        MoPubRewardedVideos.setRewardedVideoListener(this);
+    public void loadRewardedVideoWithUnitID(final String unitID) {
+        final Activity activity = getCurrentActivity();
+        final MoPubRewardedVideoListener listener = this;
+
+        activity.runOnUiThread(new Runnable() {
+            @Override public void run() {
+                MoPubRewardedVideos.loadRewardedVideo(unitID);
+                MoPubRewardedVideos.setRewardedVideoListener(listener);
+            }
+        });
     }
 
     @ReactMethod

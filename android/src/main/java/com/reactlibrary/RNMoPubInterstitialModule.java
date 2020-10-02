@@ -109,9 +109,15 @@ public class RNMoPubInterstitialModule extends ReactContextBaseJavaModule implem
 
     @ReactMethod
     public void loadAd() {
-        if (mInterstitial != null) {
-            mInterstitial.load();
-        }
+        final Activity activity = getCurrentActivity();
+
+        activity.runOnUiThread(new Runnable() {
+            @Override public void run() {
+                if (mInterstitial != null) {
+                    mInterstitial.load();
+                }
+            }
+        });
     }
 
     @ReactMethod
