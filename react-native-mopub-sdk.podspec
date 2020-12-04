@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     
     s.subspec "MoPub" do |ss|
         
-        ss.dependency 'mopub-ios-sdk', '~> 5.14.1'
+        ss.dependency 'mopub-ios-sdk', '~> 5.15.0'
         
         s.static_framework = true
     end
