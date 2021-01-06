@@ -12,7 +12,6 @@
 
 - (instancetype)init
 {
-    
     self = [super init];
     if (self) {
         
@@ -21,8 +20,6 @@
 }
 
 - (void)setAdUnitId:(NSString *)adUnitId {
-    
-    [self configureMopubMediationWithID:adUnitId];
     MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
     settings.renderingViewClass = [RNNativeAdView class];
     MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
@@ -35,7 +32,6 @@
         if (error) {
             self.onNativeAdFailed(@{@"error":error.localizedDescription});
         } else {
-            
             
             self.mpNativeAd = response;
             
@@ -53,34 +49,32 @@
             self.mpNativeAd.delegate = self;
             
             UIView *nativeAdView = [response retrieveAdViewWithError:nil];
-            nativeAdView.frame = self.bounds;
+           
+            [self setFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+            [nativeAdView setBounds:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            [nativeAdView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+           
             [self addSubview:nativeAdView];
-            
-            
         }
     }];
 }
 
--(void) configureMopubMediationWithID:(NSString *)unitID
-{
-    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization: unitID];
-    sdkConfig.loggingLevel = MPBLogLevelDebug;
-    sdkConfig.globalMediationSettings = [[NSArray alloc] initWithObjects:  @[], nil];
-    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
-        NSLog(@"SDK initialization complete");
-    }];
-}
-
 - (void)willPresentModalForNativeAd:(MPNativeAd *)nativeAd {
-    _onWillPresentModalForNativeAd(@{@"message":@"willPresentModalForNativeAd"});
+    if (_onWillPresentModalForNativeAd) {
+        _onWillPresentModalForNativeAd(@{@"message":@"willPresentModalForNativeAd"});
+    }
 }
 
 - (void)willLeaveApplicationFromNativeAd:(MPNativeAd *)nativeAd {
-    _onWillLeaveApplicationFromNativeAd(@{@"message":@"willLeaveApplicationFromNativeAd"});
+    if (_onWillLeaveApplicationFromNativeAd) {
+        _onWillLeaveApplicationFromNativeAd(@{@"message":@"willLeaveApplicationFromNativeAd"});
+    }
 }
 
 - (void)didDismissModalForNativeAd:(MPNativeAd *)nativeAd {
-    _onDidDismissModalForNativeAd(@{@"message":@"didDismissModalForNativeAd"});
+    if (_onDidDismissModalForNativeAd) {
+        _onDidDismissModalForNativeAd(@{@"message":@"didDismissModalForNativeAd"});
+    }
 }
 
 - (UIViewController *)viewControllerForPresentingModalView {
@@ -88,5 +82,10 @@
     return [UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
+- (void)updateBounds:(NSString *)width andHeight:(NSString *)height{
+    NSString *str = [NSString stringWithFormat:@"{{0, 0}, {%@, %@}}", width, height];
+    NSLog(@"[Mopub] bounds %@ %@ %@", width, height, str);
+    [self setBounds:CGRectFromString(str)];
+}
 
 @end
