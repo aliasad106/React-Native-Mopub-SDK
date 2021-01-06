@@ -6,6 +6,9 @@
 //
 
 #import "RCTViewManager.h"
+#import "RCTUIManager.h"
+#import "RCTLog.h"
+
 #import "RNNativeAdView.h"
 NS_ASSUME_NONNULL_BEGIN
 
