@@ -49,7 +49,8 @@
             self.mpNativeAd.delegate = self;
             
             UIView *nativeAdView = [response retrieveAdViewWithError:nil];
-           
+            nativeAdView.tag = 123456;
+            
             [self setFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
             [nativeAdView setBounds:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
             [nativeAdView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
@@ -85,7 +86,19 @@
 - (void)updateBounds:(NSString *)width andHeight:(NSString *)height{
     NSString *str = [NSString stringWithFormat:@"{{0, 0}, {%@, %@}}", width, height];
     NSLog(@"[Mopub] bounds %@ %@ %@", width, height, str);
-    [self setBounds:CGRectFromString(str)];
+    [[self viewWithTag:123456] setFrame:CGRectFromString(str)];
+}
+
+- (void)mopubAd:(id<MPMoPubAd>)ad didTrackImpressionWithImpressionData:(MPImpressionData * _Nullable)impressionData
+{
+    if (impressionData == nil)
+    {
+            _onImpressionData(@{@"impressionData": @""});
+    } else {
+            NSError *jsonSerializationError = nil;
+            NSObject *impressionObject = [NSJSONSerialization JSONObjectWithData:impressionData.jsonRepresentation options:0 error:&jsonSerializationError];
+            _onImpressionData(@{@"impressionData": impressionObject});
+    }
 }
 
 @end

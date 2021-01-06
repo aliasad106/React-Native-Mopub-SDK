@@ -21,12 +21,16 @@ export interface INativeAdConfig {
     title: string;
 }
 
-export interface INativeAdError {
+interface INativeAdError {
     error: string;
 }
 
-export interface INativeAdMessage {
+interface INativeAdMessage {
     message: string;
+}
+
+interface IImpressionData {
+    impressionData: any
 }
 
 export interface IRNNativeAdViewProps {
@@ -36,6 +40,7 @@ export interface IRNNativeAdViewProps {
     onAdFailed?: (error: INativeAdError) => void,
     onAdOpen?: (message: INativeAdMessage) => void,
     onAdClose?: (message: INativeAdMessage) => void,
+    onImpressionData: (jsonImpressionData: any) => void
 }
 
 export const RNNativeAdView = ({ 
@@ -44,7 +49,8 @@ export const RNNativeAdView = ({
     onAdLoaded,
     onAdFailed = () => {},
     onAdOpen,
-    onAdClose 
+    onAdClose,
+    onImpressionData,
 }: IRNNativeAdViewProps) => {
     const nativeAdViewRef = useRef(null);
 
@@ -84,6 +90,7 @@ export const RNNativeAdView = ({
                 onNativeAdFailed={(event: NativeSyntheticEvent<INativeAdError>) => onAdFailed(event.nativeEvent)}
                 onWillPresentModalForNativeAd={onAdOpen}
                 onDidDismissModalForNativeAd={onAdClose}
+                onImpressionData={(event: NativeSyntheticEvent<IImpressionData>) => onImpressionData(event.nativeEvent.impressionData)}
             >
                 {childrenWithProps}
             </NativeAdView>

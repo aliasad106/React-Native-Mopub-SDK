@@ -21,5 +21,6 @@
 @property (nonatomic, copy) RCTBubblingEventBlock onWillPresentModalForNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onWillLeaveApplicationFromNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onDidDismissModalForNativeAd;
+@property (nonatomic, copy) RCTBubblingEventBlock onImpressionData;
 
 @end

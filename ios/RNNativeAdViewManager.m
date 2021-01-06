@@ -42,6 +42,7 @@ RCT_EXPORT_VIEW_PROPERTY(onNativeAdFailed, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onWillPresentModalForNativeAd, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onWillLeaveApplicationFromNativeAd, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onDidDismissModalForNativeAd, RCTBubblingEventBlock);
+RCT_EXPORT_VIEW_PROPERTY(onImpressionData, RCTBubblingEventBlock);
 
 RCT_EXPORT_METHOD(updateBounds:(nonnull NSNumber*) reactTag withWidth:(NSString *) width andHeight:(NSString *) height) {
     [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
