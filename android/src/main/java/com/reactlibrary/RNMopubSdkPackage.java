@@ -31,7 +31,7 @@ public class RNMopubSdkPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         ArrayList<ViewManager> viewManagers = new ArrayList<>();
         viewManagers.add(new MoPubBannerManager());
-        viewManagers.add(new RNNativeAdViewManager());
+        viewManagers.add(new RNNativeAdViewManager(reactContext));
         return viewManagers;
     }
 }

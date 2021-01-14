@@ -6,6 +6,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.common.MapBuilder;
 import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
@@ -23,10 +24,15 @@ public class RNNativeAdViewManager extends ViewGroupManager<RNNativeAdView> {
 
     public static final String REACT_CLASS = "RNNativeAdView";
     RNNativeAdView rnNativeAdView;
+    ReactApplicationContext mCallerContext;
 
     @Override
     public String getName() {
         return REACT_CLASS;
+    }
+
+    public RNNativeAdViewManager(ReactApplicationContext reactContext) {
+        mCallerContext = reactContext;
     }
 
     @Override
@@ -48,8 +54,8 @@ public class RNNativeAdViewManager extends ViewGroupManager<RNNativeAdView> {
         MapBuilder.Builder<String, Object> builder = MapBuilder.builder();
         builder.put("onNativeAdLoaded", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onNativeAdLoaded")));
         builder.put("onNativeAdFailed", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onNativeAdFailed")));
+        builder.put("onImpressionData", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onImpressionData")));
 
         return builder.build();
     }
-
 }
