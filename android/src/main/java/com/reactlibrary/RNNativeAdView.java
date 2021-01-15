@@ -1,10 +1,12 @@
 package com.reactlibrary;
 
+import android.app.Activity;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import javax.annotation.Nullable;
 import org.json.JSONException;
@@ -36,7 +38,7 @@ import java.util.EnumSet;
  * Created by usamaazam on 03/04/2019.
  */
 
-public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubNativeNetworkListener {
+public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNativeNetworkListener {
 
     ReactContext mContext;
 
@@ -49,6 +51,29 @@ public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubN
         mContext = context;
     }
 
+    public void updateBounds(int width, int height) {
+        int factor = (int) mContext.getResources().getDisplayMetrics().density;
+        FrameLayout layout = findViewById(R.id.native_ad_view);
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width * factor, height * factor);
+        layout.setLayoutParams(params);
+    }
+
+    @Override
+    public void requestLayout() {
+        super.requestLayout();
+
+        post(measureAndLayout);
+    }
+
+    private final Runnable measureAndLayout = new Runnable() {
+    @Override
+        public void run() {
+            measure(MeasureSpec.makeMeasureSpec(getWidth(), MeasureSpec.EXACTLY),
+                    MeasureSpec.makeMeasureSpec(getHeight(), MeasureSpec.EXACTLY));
+            layout(getLeft(), getTop(), getRight(), getBottom());
+        }
+    };
+
     public void initializeMopubNativeAd(String adUnitId) {
 
         MoPubNative moPubNative = new MoPubNative(mContext, adUnitId, this);
@@ -56,7 +81,6 @@ public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubN
         mImpressionListener = new ImpressionListener() {
             @Override
             public void onImpression(@NonNull final String adUnitId, @Nullable final ImpressionData impressionData) {
-                Log.i("ILRD", "impression for adUnitId= " + adUnitId);
                 WritableMap event = Arguments.createMap();
 
                 if (impressionData == null) {
@@ -86,13 +110,7 @@ public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubN
         // subscribe to start listening for impression data
         ImpressionsEmitter.addListener(mImpressionListener);
         
-        ViewBinder viewBinder = new ViewBinder.Builder(R.layout.native_ads)
-            .mainImageId(R.id.native_ad_main_image)
-            .iconImageId(R.id.native_ad_icon_image)
-            .titleId(R.id.native_ad_title)
-            .textId(R.id.native_ad_text)
-            .privacyInformationIconImageId(R.id.native_ad_privacy_information_icon_image)
-            .build();
+        ViewBinder viewBinder = new ViewBinder.Builder(R.layout.native_ads).build();
 
         MoPubStaticNativeAdRenderer moPubStaticNativeAdRenderer = new MoPubStaticNativeAdRenderer(viewBinder);
         moPubNative.registerAdRenderer(moPubStaticNativeAdRenderer);
@@ -115,19 +133,6 @@ public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubN
 
     @Override
     public void onNativeLoad(NativeAd nativeAd) {
-        moPubNativeEventListener = new MoPubNativeEventListener() {
-            @Override
-            public void onImpression(View view) {
-                // Impress is recorded - do what is needed AFTER the ad is visibly shown here.
-                Log.i("ILRD", "onImpression called");
-            }
-
-            @Override
-            public void onClick(View view) {
-                Log.i("ILRD", "onClick called");
-            }
-        };
-
         StaticNativeAd staticNativeAd = (StaticNativeAd) nativeAd.getBaseNativeAd();
         String title = staticNativeAd.getTitle();
         String mainText = staticNativeAd.getText();
@@ -150,17 +155,15 @@ public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubN
         View v = adapterHelper.getAdView(null, this, nativeAd, new ViewBinder.Builder(0).build());
         // Set the native event listeners (onImpression, and onClick).
         nativeAd.setMoPubNativeEventListener(moPubNativeEventListener);
-        // Add the ad view to our view hierarchy
-        this.addView(v);
 
+        // Add the ad view to our view hierarchy
+        super.addView(v);
 
         ReactContext reactContext = (ReactContext) getContext();
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
                 getId(),
                 "onNativeAdLoaded",
                 event);
-
-        Log.d("message", "loaded");
     }
 
     @Override
@@ -172,7 +175,5 @@ public class RNNativeAdView extends ReactViewGroup implements MoPubNative.MoPubN
                 getId(),
                 "onNativeAdFailed",
                 event);
-
-        Log.d("message", "loaded");
     }
 }

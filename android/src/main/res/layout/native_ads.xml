@@ -1,32 +1,6 @@
-<RelativeLayout
+<FrameLayout
      xmlns:android="http://schemas.android.com/apk/res/android"
-     android:id="@+id/example_view"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content">
-
-     <ImageView
-         android:id="@+id/native_ad_main_image" 
-         android:layout_width="150dp"
-         android:layout_height="150dp" />
-     <ImageView
-         android:id="@+id/native_ad_icon_image" 
-         android:layout_width="80dp"
-         android:layout_height="80dp" />
-     <TextView
-         android:id="@+id/native_ad_title"
-         android:layout_width="80dp"
-         android:layout_height="80dp" />
-     <TextView
-         android:id="@+id/native_ad_text"
-         android:layout_width="80dp"
-         android:layout_height="80dp" />
-     <ImageView
-         android:id="@+id/native_ad_privacy_information_icon_image"
-         android:layout_width="40dp"
-         android:layout_height="40dp"
-         android:padding="10dp" />
-     <TextView
-         android:id="@+id/native_sponsored_text_view"
-         android:layout_width="80dp"
-         android:layout_height="80dp" />
- </RelativeLayout>
+     android:id="@+id/native_ad_view"
+     android:layout_width="fill_parent"
+     android:layout_height="fill_parent">
+</FrameLayout>

@@ -3,7 +3,6 @@ import {
     findNodeHandle, 
     LayoutChangeEvent, 
     NativeSyntheticEvent,
-    Platform, 
     requireNativeComponent, 
     UIManager, 
     View 
@@ -54,15 +53,6 @@ export const RNNativeAdView = ({
 }: IRNNativeAdViewProps) => {
     const nativeAdViewRef = useRef(null);
 
-    const childrenWithProps = React.Children.map(children, (child) => {
-        if (React.isValidElement(child)) {
-            return React.cloneElement(child, {
-                updateBounds,
-            });
-        }
-        return child
-    });
-
     const updateBounds = useCallback((width: string, height: string) => {
         // @ts-ignore
         UIManager.dispatchViewManagerCommand(
@@ -76,9 +66,7 @@ export const RNNativeAdView = ({
 
     const onLayout = useCallback((event: LayoutChangeEvent) => {
         const { height, width } = event.nativeEvent.layout;
-        if (Platform.OS === "ios") {
-            updateBounds(width.toString(), height.toString());
-        }
+            updateBounds(Math.round(width).toString(), Math.round(height).toString());
     }, [])
 
     return (
@@ -92,7 +80,7 @@ export const RNNativeAdView = ({
                 onDidDismissModalForNativeAd={onAdClose}
                 onImpressionData={(event: NativeSyntheticEvent<IImpressionData>) => onImpressionData(event.nativeEvent.impressionData)}
             >
-                {childrenWithProps}
+                {children}
             </NativeAdView>
         </View>
     );
