@@ -27,5 +27,10 @@ Pod::Spec.new do |s|
         
         s.static_framework = true
     end
+
+    # Required for Native Ads
+    s.subspec "AdMob" do |ss|
+        ss.dependency 'MoPub-AdMob-Adapters', '~> 7.69.0.1'
+    end
 end
 

@@ -52,6 +52,12 @@ dependencies {
     implementation('com.mopub:mopub-sdk:5.15.0@aar') {
         transitive = true
     }
+
+    // Required for Native Ads
+    
+    // Google (AdMob & Ad Manager)
+    implementation 'com.google.android.gms:play-services-ads:19.6.0'
+    implementation 'com.mopub.mediation:admob:19.6.0.1'
 }
 
 def configureReactNativePom(def pom) {
