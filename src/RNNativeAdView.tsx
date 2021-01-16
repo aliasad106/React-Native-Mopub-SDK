@@ -3,6 +3,7 @@ import {
     findNodeHandle, 
     LayoutChangeEvent, 
     NativeSyntheticEvent,
+    Platform,
     requireNativeComponent, 
     UIManager, 
     View 
@@ -66,7 +67,10 @@ export const RNNativeAdView = ({
 
     const onLayout = useCallback((event: LayoutChangeEvent) => {
         const { height, width } = event.nativeEvent.layout;
+
+        if (Platform.OS === "ios") {
             updateBounds(Math.round(width).toString(), Math.round(height).toString());
+        }
     }, [])
 
     return (

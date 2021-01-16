@@ -80,7 +80,7 @@ public class RNNativeAdViewManager extends ViewGroupManager<RNNativeAdView> {
         
         switch (commandId) {
         case COMMAND_UPDATE_BOUNDS: {
-            // view.updateBounds(Integer.parseInt(args.getString(0)), Integer.parseInt(args.getString(1)));
+            view.updateBounds(Integer.parseInt(args.getString(0)), Integer.parseInt(args.getString(1)));
             return;
         }
         
