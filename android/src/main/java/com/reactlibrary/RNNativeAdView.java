@@ -17,6 +17,8 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 
+import com.mopub.nativeads.GooglePlayServicesAdRenderer;
+import com.mopub.nativeads.GooglePlayServicesViewBinder;
 import com.mopub.nativeads.AdapterHelper;
 import com.mopub.nativeads.BaseNativeAd;
 import com.mopub.nativeads.MoPubNative;
@@ -75,7 +77,6 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
     };
 
     public void initializeMopubNativeAd(String adUnitId) {
-
         MoPubNative moPubNative = new MoPubNative(mContext, adUnitId, this);
 
         mImpressionListener = new ImpressionListener() {
@@ -110,9 +111,17 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
         // subscribe to start listening for impression data
         ImpressionsEmitter.addListener(mImpressionListener);
         
-        ViewBinder viewBinder = new ViewBinder.Builder(R.layout.native_ads).build();
+        // Mopub rendered
+        MoPubStaticNativeAdRenderer moPubStaticNativeAdRenderer = new MoPubStaticNativeAdRenderer(
+            new ViewBinder.Builder(R.layout.native_ads)
+            .build());
+        // Google rendered
+        final GooglePlayServicesAdRenderer googlePlayServicesAdRenderer = new GooglePlayServicesAdRenderer(
+            new GooglePlayServicesViewBinder.Builder(R.layout.native_ads)
+            .build());
 
-        MoPubStaticNativeAdRenderer moPubStaticNativeAdRenderer = new MoPubStaticNativeAdRenderer(viewBinder);
+        // Mopub has to be last
+        moPubNative.registerAdRenderer(googlePlayServicesAdRenderer);
         moPubNative.registerAdRenderer(moPubStaticNativeAdRenderer);
 
         EnumSet<RequestParameters.NativeAdAsset> desiredAssets = EnumSet.of(

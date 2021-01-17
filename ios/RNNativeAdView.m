@@ -22,8 +22,13 @@
 - (void)setAdUnitId:(NSString *)adUnitId {
     MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
     settings.renderingViewClass = [RNNativeAdView class];
-    MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
-    MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:adUnitId rendererConfigurations:@[config]];
+    // Mopub rendered
+    MPNativeAdRendererConfiguration *mopubConfiguration = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
+    // Google rendered
+    MPNativeAdRendererConfiguration *googleConfiguration = [MPGoogleAdMobNativeRenderer rendererConfigurationWithRendererSettings:settings];
+
+    MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:adUnitId rendererConfigurations:@[mopubConfiguration, googleConfiguration]];
+    
     MPNativeAdRequestTargeting *targeting = [MPNativeAdRequestTargeting targeting];
     targeting.desiredAssets = [NSSet setWithObjects:kAdTitleKey, kAdTextKey, kAdCTATextKey, kAdIconImageKey, kAdMainImageKey, kAdStarRatingKey, nil]; //The constants correspond to the 6 elements of MoPub native ads
     adRequest.targeting = targeting;
