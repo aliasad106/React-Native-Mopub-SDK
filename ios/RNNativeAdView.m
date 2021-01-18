@@ -12,7 +12,6 @@
 
 - (instancetype)init
 {
-    
     self = [super init];
     if (self) {
         
@@ -21,12 +20,15 @@
 }
 
 - (void)setAdUnitId:(NSString *)adUnitId {
-    
-    [self configureMopubMediationWithID:adUnitId];
     MPStaticNativeAdRendererSettings *settings = [[MPStaticNativeAdRendererSettings alloc] init];
     settings.renderingViewClass = [RNNativeAdView class];
-    MPNativeAdRendererConfiguration *config = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
-    MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:adUnitId rendererConfigurations:@[config]];
+    // Mopub rendered
+    MPNativeAdRendererConfiguration *mopubConfiguration = [MPStaticNativeAdRenderer rendererConfigurationWithRendererSettings:settings];
+    // Google rendered
+    MPNativeAdRendererConfiguration *googleConfiguration = [MPGoogleAdMobNativeRenderer rendererConfigurationWithRendererSettings:settings];
+
+    MPNativeAdRequest *adRequest = [MPNativeAdRequest requestWithAdUnitIdentifier:adUnitId rendererConfigurations:@[mopubConfiguration, googleConfiguration]];
+    
     MPNativeAdRequestTargeting *targeting = [MPNativeAdRequestTargeting targeting];
     targeting.desiredAssets = [NSSet setWithObjects:kAdTitleKey, kAdTextKey, kAdCTATextKey, kAdIconImageKey, kAdMainImageKey, kAdStarRatingKey, nil]; //The constants correspond to the 6 elements of MoPub native ads
     adRequest.targeting = targeting;
@@ -35,7 +37,6 @@
         if (error) {
             self.onNativeAdFailed(@{@"error":error.localizedDescription});
         } else {
-            
             
             self.mpNativeAd = response;
             
@@ -53,34 +54,33 @@
             self.mpNativeAd.delegate = self;
             
             UIView *nativeAdView = [response retrieveAdViewWithError:nil];
-            nativeAdView.frame = self.bounds;
+            nativeAdView.tag = 123456;
+            
+            [self setFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
+            [nativeAdView setBounds:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+            [nativeAdView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+           
             [self addSubview:nativeAdView];
-            
-            
         }
     }];
 }
 
--(void) configureMopubMediationWithID:(NSString *)unitID
-{
-    MPMoPubConfiguration *sdkConfig = [[MPMoPubConfiguration alloc] initWithAdUnitIdForAppInitialization: unitID];
-    sdkConfig.loggingLevel = MPBLogLevelDebug;
-    sdkConfig.globalMediationSettings = [[NSArray alloc] initWithObjects:  @[], nil];
-    [[MoPub sharedInstance] initializeSdkWithConfiguration:sdkConfig completion:^{
-        NSLog(@"SDK initialization complete");
-    }];
-}
-
 - (void)willPresentModalForNativeAd:(MPNativeAd *)nativeAd {
-    _onWillPresentModalForNativeAd(@{@"message":@"willPresentModalForNativeAd"});
+    if (_onWillPresentModalForNativeAd) {
+        _onWillPresentModalForNativeAd(@{@"message":@"willPresentModalForNativeAd"});
+    }
 }
 
 - (void)willLeaveApplicationFromNativeAd:(MPNativeAd *)nativeAd {
-    _onWillLeaveApplicationFromNativeAd(@{@"message":@"willLeaveApplicationFromNativeAd"});
+    if (_onWillLeaveApplicationFromNativeAd) {
+        _onWillLeaveApplicationFromNativeAd(@{@"message":@"willLeaveApplicationFromNativeAd"});
+    }
 }
 
 - (void)didDismissModalForNativeAd:(MPNativeAd *)nativeAd {
-    _onDidDismissModalForNativeAd(@{@"message":@"didDismissModalForNativeAd"});
+    if (_onDidDismissModalForNativeAd) {
+        _onDidDismissModalForNativeAd(@{@"message":@"didDismissModalForNativeAd"});
+    }
 }
 
 - (UIViewController *)viewControllerForPresentingModalView {
@@ -88,5 +88,22 @@
     return [UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
+- (void)updateBounds:(NSString *)width andHeight:(NSString *)height{
+    NSString *str = [NSString stringWithFormat:@"{{0, 0}, {%@, %@}}", width, height];
+    NSLog(@"[Mopub] bounds %@ %@ %@", width, height, str);
+    [[self viewWithTag:123456] setFrame:CGRectFromString(str)];
+}
+
+- (void)mopubAd:(id<MPMoPubAd>)ad didTrackImpressionWithImpressionData:(MPImpressionData * _Nullable)impressionData
+{
+    if (impressionData == nil)
+    {
+            _onImpressionData(@{@"impressionData": @""});
+    } else {
+            NSError *jsonSerializationError = nil;
+            NSObject *impressionObject = [NSJSONSerialization JSONObjectWithData:impressionData.jsonRepresentation options:0 error:&jsonSerializationError];
+            _onImpressionData(@{@"impressionData": impressionObject});
+    }
+}
 
 @end

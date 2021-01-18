@@ -7,22 +7,21 @@
 
 #import "RCTView.h"
 #import "MPNativeAdRendering.h"
+#import "MPGoogleAdMobNativeRenderer.h"
 #import <mopub-ios-sdk/MoPub.h>
 
-NS_ASSUME_NONNULL_BEGIN
-
-@interface RNNativeAdView : RCTView <MPNativeAdRendering, MPNativeAdDelegate>
+@interface RNNativeAdView : RCTView <MPNativeAdRendering>
 
 @property (nonatomic, strong) NSString *adUnitId;
 @property (nonatomic, strong) MPNativeAd *mpNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onNativeAdLoaded;
 @property (nonatomic, copy) RCTBubblingEventBlock onNativeAdFailed;
 
+-(void) updateBounds: (NSString *)width andHeight:(NSString *)height;
+
 @property (nonatomic, copy) RCTBubblingEventBlock onWillPresentModalForNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onWillLeaveApplicationFromNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onDidDismissModalForNativeAd;
+@property (nonatomic, copy) RCTBubblingEventBlock onImpressionData;
+
 @end
-
-
-NS_ASSUME_NONNULL_END
-

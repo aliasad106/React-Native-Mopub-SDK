@@ -1,12 +1,13 @@
 buildscript {
     repositories {
+        google()
         jcenter()
     }
 
     dependencies {
         // Matches the RN Hello World template
         // https://github.com/facebook/react-native/blob/1e8f3b11027fe0a7514b4fc97d0798d3c64bc895/local-cli/templates/HelloWorld/android/build.gradle#L8
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:3.5.3'
     }
 }
 
@@ -45,6 +46,7 @@ repositories {
         url "$projectDir/../node_modules/react-native/android"
     }
     mavenCentral()
+    google()
 }
 
 dependencies {
@@ -52,6 +54,12 @@ dependencies {
     implementation('com.mopub:mopub-sdk:5.15.0@aar') {
         transitive = true
     }
+
+    // Required for Native Ads
+    
+    // Google (AdMob & Ad Manager)
+    implementation 'com.google.android.gms:play-services-ads:19.5.0'
+    implementation 'com.mopub.mediation:admob:19.5.0.3'
 }
 
 def configureReactNativePom(def pom) {
