@@ -150,6 +150,10 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
         String iconImageSource = staticNativeAd.getIconImageUrl();
         String privacyIconImageSource = staticNativeAd.getPrivacyInformationIconImageUrl();
 
+        if (privacyIconImageSource == null) {
+            privacyIconImageSource = "asset:/images/mopub_privacy_icon.png";
+        }
+
         WritableMap event = Arguments.createMap();
         event.putString("title", title);
         event.putString("mainText", mainText);
@@ -157,7 +161,6 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
         event.putString("mainImageSource", mainImageSource);
         event.putString("iconImageSource", iconImageSource);
         event.putString("privacyIconImageSource", privacyIconImageSource);
-        event.putString("link", staticNativeAd.getClickDestinationUrl());
 
         AdapterHelper adapterHelper = new AdapterHelper(mContext.getCurrentActivity(), 0, 3);
         // Retrieve the pre-built ad view that AdapterHelper prepared for us.

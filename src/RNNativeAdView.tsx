@@ -14,7 +14,6 @@ const NativeAdView = requireNativeComponent("RNNativeAdView");
 export interface INativeAdConfig {
     callToActionText: string;
     iconImageSource: string;
-    link?: string;
     mainImageSource: string;
     mainText: string;
     privacyIconImageSource: string;
