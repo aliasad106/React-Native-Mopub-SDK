@@ -60,6 +60,7 @@ public class RNNativeAdViewManager extends ViewGroupManager<RNNativeAdView> {
         builder.put("onNativeAdLoaded", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onNativeAdLoaded")));
         builder.put("onNativeAdFailed", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onNativeAdFailed")));
         builder.put("onImpressionData", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onImpressionData")));
+        builder.put("onAdLayout", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onAdLayout")));
 
         return builder.build();
     }
