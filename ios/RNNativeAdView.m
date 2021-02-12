@@ -14,9 +14,34 @@
 {
     self = [super init];
     if (self) {
-        
+        [self customInit];
     }
     return self;
+}
+
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
+{
+    self = [super initWithCoder:aDecoder];
+    if (self) {
+        [self customInit];
+    }
+    return self;
+}
+
+- (instancetype)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self customInit];
+    }
+    return self;
+}
+
+- (void)customInit
+{
+    [[NSBundle mainBundle] loadNibNamed:@"NativeAdListView" owner:self options:nil];
+    [self addSubview:self.contentView];
+    self.contentView.frame = self.bounds;
 }
 
 - (void)setAdUnitId:(NSString *)adUnitId {
@@ -37,17 +62,16 @@
         if (error) {
             self.onNativeAdFailed(@{@"error":error.localizedDescription});
         } else {
-            
             self.mpNativeAd = response;
             
             NSDictionary *data = [response properties];
             
-            NSString *title =  data[@"title"];
-            NSString *mainText =  data[@"text"];
-            NSString *callToActionText =  data[@"ctatext"];
-            NSString *mainImageSource =  data[@"mainimage"];
-            NSString *privacyIconImageSource =  data[@"privacyicon"];
-            NSString *iconImageSource =  data[@"iconimage"];
+            NSString *title =  data[@"title"] ? data[@"title"] : @"";
+            NSString *mainText =  data[@"text"] ? data[@"text"] : @"";
+            NSString *callToActionText =  data[@"ctatext"] ? data[@"ctatext"] : @"";
+            NSString *mainImageSource =  data[@"mainimage"] ? data[@"mainimage"] : @"";
+            NSString *privacyIconImageSource =  data[@"privacyicon"] ? data[@"privacyicon"] : @"";
+            NSString *iconImageSource =  data[@"iconimage"] ? data[@"iconimage"] : @"";
             
             self.onNativeAdLoaded(@{@"title":title, @"mainText": mainText, @"callToActionText":callToActionText,@"mainImageSource":mainImageSource, @"privacyIconImageSource":privacyIconImageSource,@"iconImageSource":iconImageSource});
             
@@ -84,13 +108,12 @@
 }
 
 - (UIViewController *)viewControllerForPresentingModalView {
-    
     return [UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
 - (void)updateBounds:(NSString *)width andHeight:(NSString *)height{
     NSString *str = [NSString stringWithFormat:@"{{0, 0}, {%@, %@}}", width, height];
-    NSLog(@"[Mopub] bounds %@ %@ %@", width, height, str);
+    NSLog(@"Mopub [Mopub] bounds %@ %@ %@", width, height, str);
     [[self viewWithTag:123456] setFrame:CGRectFromString(str)];
 }
 

@@ -11,6 +11,13 @@
 #import <mopub-ios-sdk/MoPub.h>
 
 @interface RNNativeAdView : RCTView <MPNativeAdRendering>
+@property (strong, nonatomic) IBOutlet RNNativeAdView *contentView;
+
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *iconImageView;
+@property (unsafe_unretained, nonatomic) IBOutlet PreferredWidthLabel *titleLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet PreferredWidthLabel *mainTextLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UILabel *sponsoredByLabel;
+@property (unsafe_unretained, nonatomic) IBOutlet UIImageView *privacyInformationIconImageView;
 
 @property (nonatomic, strong) NSString *adUnitId;
 @property (nonatomic, strong) MPNativeAd *mpNativeAd;

@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		546B2C6F25D6CBDD00F5231E /* AdLibSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6425D6CBDD00F5231E /* AdLibSDK.m */; };
+		546B2C7025D6CBDD00F5231E /* RNNativeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C5F25D6CBDD00F5231E /* RNNativeAdView.m */; };
+		546B2C7125D6CBDD00F5231E /* RNMoPubRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6225D6CBDD00F5231E /* RNMoPubRewardedVideo.m */; };
+		546B2C7225D6CBDD00F5231E /* RNMopubSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6625D6CBDD00F5231E /* RNMopubSdk.m */; };
+		546B2C7325D6CBDD00F5231E /* RNMoPubInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6D25D6CBDD00F5231E /* RNMoPubInterstitial.m */; };
+		546B2C7425D6CBDD00F5231E /* RNNativeAdViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6925D6CBDD00F5231E /* RNNativeAdViewManager.m */; };
+		546B2C7525D6CBDD00F5231E /* RNMoPubBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6C25D6CBDD00F5231E /* RNMoPubBannerManager.m */; };
+		546B2C7625D6CBDD00F5231E /* RNMoPubBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 546B2C6B25D6CBDD00F5231E /* RNMoPubBanner.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNMopubSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNMopubSdk.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +32,23 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNMopubSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNMopubSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		546B2C5E25D6CBDD00F5231E /* RNNativeAdView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNNativeAdView.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNNativeAdView.h"; sourceTree = "<absolute>"; };
+		546B2C5F25D6CBDD00F5231E /* RNNativeAdView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNNativeAdView.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNNativeAdView.m"; sourceTree = "<absolute>"; };
+		546B2C6025D6CBDD00F5231E /* RNMoPubBannerManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNMoPubBannerManager.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubBannerManager.h"; sourceTree = "<absolute>"; };
+		546B2C6125D6CBDD00F5231E /* RNMoPubInterstitial.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNMoPubInterstitial.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubInterstitial.h"; sourceTree = "<absolute>"; };
+		546B2C6225D6CBDD00F5231E /* RNMoPubRewardedVideo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNMoPubRewardedVideo.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubRewardedVideo.m"; sourceTree = "<absolute>"; };
+		546B2C6325D6CBDD00F5231E /* NativeAdListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = NativeAdListView.xib; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/NativeAdListView.xib"; sourceTree = "<absolute>"; };
+		546B2C6425D6CBDD00F5231E /* AdLibSDK.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AdLibSDK.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/AdLibSDK.m"; sourceTree = "<absolute>"; };
+		546B2C6525D6CBDD00F5231E /* RNMopubSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNMopubSdk.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMopubSdk.h"; sourceTree = "<absolute>"; };
+		546B2C6625D6CBDD00F5231E /* RNMopubSdk.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNMopubSdk.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMopubSdk.m"; sourceTree = "<absolute>"; };
+		546B2C6725D6CBDD00F5231E /* AdLibSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AdLibSDK.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/AdLibSDK.h"; sourceTree = "<absolute>"; };
+		546B2C6825D6CBDD00F5231E /* RNNativeAdViewManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNNativeAdViewManager.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNNativeAdViewManager.h"; sourceTree = "<absolute>"; };
+		546B2C6925D6CBDD00F5231E /* RNNativeAdViewManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNNativeAdViewManager.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNNativeAdViewManager.m"; sourceTree = "<absolute>"; };
+		546B2C6A25D6CBDD00F5231E /* RNMoPubBanner.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNMoPubBanner.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubBanner.h"; sourceTree = "<absolute>"; };
+		546B2C6B25D6CBDD00F5231E /* RNMoPubBanner.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNMoPubBanner.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubBanner.m"; sourceTree = "<absolute>"; };
+		546B2C6C25D6CBDD00F5231E /* RNMoPubBannerManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNMoPubBannerManager.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubBannerManager.m"; sourceTree = "<absolute>"; };
+		546B2C6D25D6CBDD00F5231E /* RNMoPubInterstitial.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = RNMoPubInterstitial.m; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubInterstitial.m"; sourceTree = "<absolute>"; };
+		546B2C6E25D6CBDD00F5231E /* RNMoPubRewardedVideo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RNMoPubRewardedVideo.h; path = "/Users/damiensoulard/projects/cotyapps/React-Native-Mopub-SDK/ios/RNMoPubRewardedVideo.h"; sourceTree = "<absolute>"; };
 		B3E7B5881CC2AC0600A0062D /* RNMopubSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMopubSdk.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNMopubSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMopubSdk.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -50,8 +75,25 @@
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
+				546B2C6725D6CBDD00F5231E /* AdLibSDK.h */,
+				546B2C6425D6CBDD00F5231E /* AdLibSDK.m */,
 				B3E7B5881CC2AC0600A0062D /* RNMopubSdk.h */,
 				B3E7B5891CC2AC0600A0062D /* RNMopubSdk.m */,
+				546B2C6325D6CBDD00F5231E /* NativeAdListView.xib */,
+				546B2C6A25D6CBDD00F5231E /* RNMoPubBanner.h */,
+				546B2C6B25D6CBDD00F5231E /* RNMoPubBanner.m */,
+				546B2C6025D6CBDD00F5231E /* RNMoPubBannerManager.h */,
+				546B2C6C25D6CBDD00F5231E /* RNMoPubBannerManager.m */,
+				546B2C6125D6CBDD00F5231E /* RNMoPubInterstitial.h */,
+				546B2C6D25D6CBDD00F5231E /* RNMoPubInterstitial.m */,
+				546B2C6E25D6CBDD00F5231E /* RNMoPubRewardedVideo.h */,
+				546B2C6225D6CBDD00F5231E /* RNMoPubRewardedVideo.m */,
+				546B2C6525D6CBDD00F5231E /* RNMopubSdk.h */,
+				546B2C6625D6CBDD00F5231E /* RNMopubSdk.m */,
+				546B2C5E25D6CBDD00F5231E /* RNNativeAdView.h */,
+				546B2C5F25D6CBDD00F5231E /* RNNativeAdView.m */,
+				546B2C6825D6CBDD00F5231E /* RNNativeAdViewManager.h */,
+				546B2C6925D6CBDD00F5231E /* RNNativeAdViewManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,6 +137,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
@@ -112,7 +155,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				546B2C7025D6CBDD00F5231E /* RNNativeAdView.m in Sources */,
+				546B2C7325D6CBDD00F5231E /* RNMoPubInterstitial.m in Sources */,
+				546B2C7425D6CBDD00F5231E /* RNNativeAdViewManager.m in Sources */,
+				546B2C7125D6CBDD00F5231E /* RNMoPubRewardedVideo.m in Sources */,
+				546B2C7225D6CBDD00F5231E /* RNMopubSdk.m in Sources */,
+				546B2C7525D6CBDD00F5231E /* RNMoPubBannerManager.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNMopubSdk.m in Sources */,
+				546B2C6F25D6CBDD00F5231E /* AdLibSDK.m in Sources */,
+				546B2C7625D6CBDD00F5231E /* RNMoPubBanner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +267,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",
