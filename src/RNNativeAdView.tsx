@@ -1,9 +1,7 @@
-import React, { useCallback, useRef } from "react";
+import React from "react";
 import { 
-    findNodeHandle, 
     NativeSyntheticEvent,
     requireNativeComponent, 
-    UIManager, 
 } from "react-native";
 
 const NativeAdView = requireNativeComponent("RNNativeAdView");
@@ -50,11 +48,8 @@ export const RNNativeAdView = ({
     onImpressionData,
     onAdLayout,
 }: IRNNativeAdViewProps) => {
-    const nativeAdViewRef = useRef(null);
-
     return (
         <NativeAdView
-            ref={nativeAdViewRef}
             adUnitId={adUnitId}
             format={format}
             onNativeAdLoaded={onAdLoaded}

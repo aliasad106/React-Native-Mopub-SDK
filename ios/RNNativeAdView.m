@@ -19,15 +19,6 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)coder
-{
-    self = [super initWithCoder:coder];
-    if (self) {
-        [self customInit];
-    }
-    return self;
-}
-
 - (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -41,7 +32,7 @@
 {
     [[NSBundle mainBundle] loadNibNamed:@"NativeAdListView" owner:self options:nil];
     [self addSubview:self.contentView];
-//    self.contentView.frame = self.bounds;
+    self.contentView.frame = self.bounds;
 }
 
 - (void)setAdUnitId:(NSString *)adUnitId {
@@ -62,24 +53,21 @@
         if (error) {
             self.onNativeAdFailed(@{@"error":error.localizedDescription});
         } else {
-            self.onNativeAdLoaded(@{@"height": [NSString stringWithFormat:@"%.2f", self.contentView.frame.size.height], @"width": [NSString stringWithFormat:@"%.2f", self.contentView.frame.size.width]});
+            self.onNativeAdLoaded(@{});
 
             self.mpNativeAd = response;
             self.mpNativeAd.delegate = self;
             
             UIView *nativeAdView = [response retrieveAdViewWithError:nil];
-            nativeAdView.tag = 123456;
 
-            NSLog(@"Mopub xib content frame %f", self.contentView.bounds.size.height);
-            NSLog(@"Mopub xib content bounds %f", self.contentView.frame.size.height);
-            NSLog(@"Mopub xib frame %f", self.frame.size.height);
-            NSLog(@"Mopub xib bounds %f", self.bounds.size.height);
-            NSLog(@"Mopub xib NA bounds %f", nativeAdView.bounds.size.height);
-            NSLog(@"Mopub xib NA frame %f", nativeAdView.frame.size.height);
-            
-            nativeAdView.frame = self.bounds;
-            // [nativeAdView layoutIfNeeded];
+            nativeAdView.translatesAutoresizingMaskIntoConstraints = false;
             [self addSubview:nativeAdView];
+            
+            [nativeAdView.topAnchor constraintEqualToAnchor:self.topAnchor constant:0].active = YES;
+                [nativeAdView.bottomAnchor constraintEqualToAnchor:self.bottomAnchor constant:0].active = YES;
+                [nativeAdView.leadingAnchor constraintEqualToAnchor:self.leadingAnchor constant:0].active = YES;
+                [nativeAdView.trailingAnchor constraintEqualToAnchor:self.trailingAnchor constant:0].active = YES;
+            [nativeAdView layoutIfNeeded];
         }
     }];
 }
@@ -106,12 +94,6 @@
     return [UIApplication sharedApplication].delegate.window.rootViewController;
 }
 
-- (void)updateBounds:(NSString *)width andHeight:(NSString *)height{
-    NSString *str = [NSString stringWithFormat:@"{{0, 0}, {%@, %@}}", width, height];
-    NSLog(@"Mopub [Mopub] bounds %@ %@ %@", width, height, str);
-    [[self viewWithTag:123456] setFrame:CGRectFromString(str)];
-}
-
 - (void)mopubAd:(id<MPMoPubAd>)ad didTrackImpressionWithImpressionData:(MPImpressionData * _Nullable)impressionData
 {
     if (impressionData == nil)
@@ -124,10 +106,16 @@
     }
 }
 
-//- (UILabel *)nativeMainTextLabel
-//{
-//    return self.mainTextLabel;
-//}
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    // layout your views
+}
+
+- (UILabel *)nativeMainTextLabel
+{
+    return self.mainTextLabel;
+}
 
 - (UILabel *)nativeTitleTextLabel
 {

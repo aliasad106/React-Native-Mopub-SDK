@@ -11,7 +11,8 @@
 #import <mopub-ios-sdk/MoPub.h>
 
 @interface RNNativeAdView : UIView <MPNativeAdRendering>
-@property (strong, nonatomic) IBOutlet RNNativeAdView *contentView;
+
+@property (strong, nonatomic) IBOutlet UIView *contentView;
 
 @property (unsafe_unretained, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (unsafe_unretained, nonatomic) IBOutlet UILabel *titleLabel;
@@ -21,11 +22,9 @@
 
 @property (nonatomic, strong) NSString *adUnitId;
 @property (nonatomic, strong) MPNativeAd *mpNativeAd;
+
 @property (nonatomic, copy) RCTBubblingEventBlock onNativeAdLoaded;
 @property (nonatomic, copy) RCTBubblingEventBlock onNativeAdFailed;
-
-- (void) updateBounds: (NSString *)width andHeight:(NSString *)height;
-
 @property (nonatomic, copy) RCTBubblingEventBlock onWillPresentModalForNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onWillLeaveApplicationFromNativeAd;
 @property (nonatomic, copy) RCTBubblingEventBlock onDidDismissModalForNativeAd;
