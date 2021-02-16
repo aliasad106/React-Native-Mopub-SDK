@@ -16,6 +16,7 @@ Pod::Spec.new do |s|
     s.platform     = :ios, "7.0"
     s.source       = { :git => "https://github.com/aliasad106/React-Native-Mopub-SDK", :tag => "#{s.version}" }
     
+    s.resources = "ios/**/*.{xib}"
     s.source_files = "ios/**/*.{h,m}"
     s.requires_arc = true
     

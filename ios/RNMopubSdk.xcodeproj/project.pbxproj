@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		386070AF25DBD9660009C491 /* AdLibSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860709C25DBD9660009C491 /* AdLibSDK.m */; };
+		386070B025DBD9660009C491 /* RNMopubSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = 3860709F25DBD9660009C491 /* RNMopubSdk.m */; };
+		386070B125DBD9660009C491 /* RNMoPubRewardedVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 386070A025DBD9660009C491 /* RNMoPubRewardedVideo.m */; };
+		386070B225DBD9660009C491 /* RNNativeAdView.m in Sources */ = {isa = PBXBuildFile; fileRef = 386070A225DBD9660009C491 /* RNNativeAdView.m */; };
+		386070B325DBD9660009C491 /* RNNativeAdViewManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 386070A325DBD9660009C491 /* RNNativeAdViewManager.m */; };
+		386070B425DBD9660009C491 /* RNMoPubInterstitial.m in Sources */ = {isa = PBXBuildFile; fileRef = 386070A425DBD9660009C491 /* RNMoPubInterstitial.m */; };
+		386070B525DBD9660009C491 /* RNMoPubBanner.m in Sources */ = {isa = PBXBuildFile; fileRef = 386070A525DBD9660009C491 /* RNMoPubBanner.m */; };
+		386070B625DBD9660009C491 /* RNMoPubBannerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 386070AA25DBD9660009C491 /* RNMoPubBannerManager.m */; };
 		B3E7B58A1CC2AC0600A0062D /* RNMopubSdk.m in Sources */ = {isa = PBXBuildFile; fileRef = B3E7B5891CC2AC0600A0062D /* RNMopubSdk.m */; };
 /* End PBXBuildFile section */
 
@@ -24,6 +32,25 @@
 
 /* Begin PBXFileReference section */
 		134814201AA4EA6300B7C361 /* libRNMopubSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNMopubSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3860709A25DBD9660009C491 /* RNNativeAdViewManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNativeAdViewManager.h; sourceTree = "<group>"; };
+		3860709B25DBD9660009C491 /* RNMoPubBannerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMoPubBannerManager.h; sourceTree = "<group>"; };
+		3860709C25DBD9660009C491 /* AdLibSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdLibSDK.m; sourceTree = "<group>"; };
+		3860709D25DBD9660009C491 /* AdLibSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdLibSDK.h; sourceTree = "<group>"; };
+		3860709E25DBD9660009C491 /* RNMoPubInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMoPubInterstitial.h; sourceTree = "<group>"; };
+		3860709F25DBD9660009C491 /* RNMopubSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMopubSdk.m; sourceTree = "<group>"; };
+		386070A025DBD9660009C491 /* RNMoPubRewardedVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMoPubRewardedVideo.m; sourceTree = "<group>"; };
+		386070A125DBD9660009C491 /* RNMopubSdk.xcworkspace */ = {isa = PBXFileReference; lastKnownFileType = wrapper.workspace; path = RNMopubSdk.xcworkspace; sourceTree = "<group>"; };
+		386070A225DBD9660009C491 /* RNNativeAdView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNativeAdView.m; sourceTree = "<group>"; };
+		386070A325DBD9660009C491 /* RNNativeAdViewManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNNativeAdViewManager.m; sourceTree = "<group>"; };
+		386070A425DBD9660009C491 /* RNMoPubInterstitial.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMoPubInterstitial.m; sourceTree = "<group>"; };
+		386070A525DBD9660009C491 /* RNMoPubBanner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMoPubBanner.m; sourceTree = "<group>"; };
+		386070A625DBD9660009C491 /* RNMoPubBanner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMoPubBanner.h; sourceTree = "<group>"; };
+		386070A725DBD9660009C491 /* RNMopubSdk.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = RNMopubSdk.xcodeproj; sourceTree = "<group>"; };
+		386070AA25DBD9660009C491 /* RNMoPubBannerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMoPubBannerManager.m; sourceTree = "<group>"; };
+		386070AB25DBD9660009C491 /* RNMopubSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMopubSdk.h; sourceTree = "<group>"; };
+		386070AC25DBD9660009C491 /* RNNativeAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNNativeAdView.h; sourceTree = "<group>"; };
+		386070AD25DBD9660009C491 /* NativeAdListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NativeAdListView.xib; sourceTree = "<group>"; };
+		386070AE25DBD9660009C491 /* RNMoPubRewardedVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMoPubRewardedVideo.h; sourceTree = "<group>"; };
 		B3E7B5881CC2AC0600A0062D /* RNMopubSdk.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RNMopubSdk.h; sourceTree = "<group>"; };
 		B3E7B5891CC2AC0600A0062D /* RNMopubSdk.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RNMopubSdk.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -47,11 +74,35 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		386070A825DBD9660009C491 /* Products */ = {
+			isa = PBXGroup;
+			name = Products;
+			sourceTree = "<group>";
+		};
 		58B511D21A9E6C8500147676 = {
 			isa = PBXGroup;
 			children = (
 				B3E7B5881CC2AC0600A0062D /* RNMopubSdk.h */,
+				386070A425DBD9660009C491 /* RNMoPubInterstitial.m */,
+				386070AE25DBD9660009C491 /* RNMoPubRewardedVideo.h */,
+				386070A025DBD9660009C491 /* RNMoPubRewardedVideo.m */,
+				386070AB25DBD9660009C491 /* RNMopubSdk.h */,
 				B3E7B5891CC2AC0600A0062D /* RNMopubSdk.m */,
+				3860709D25DBD9660009C491 /* AdLibSDK.h */,
+				3860709C25DBD9660009C491 /* AdLibSDK.m */,
+				386070AD25DBD9660009C491 /* NativeAdListView.xib */,
+				386070A625DBD9660009C491 /* RNMoPubBanner.h */,
+				386070A525DBD9660009C491 /* RNMoPubBanner.m */,
+				3860709B25DBD9660009C491 /* RNMoPubBannerManager.h */,
+				386070AA25DBD9660009C491 /* RNMoPubBannerManager.m */,
+				3860709E25DBD9660009C491 /* RNMoPubInterstitial.h */,
+				3860709F25DBD9660009C491 /* RNMopubSdk.m */,
+				386070A725DBD9660009C491 /* RNMopubSdk.xcodeproj */,
+				386070A125DBD9660009C491 /* RNMopubSdk.xcworkspace */,
+				386070AC25DBD9660009C491 /* RNNativeAdView.h */,
+				386070A225DBD9660009C491 /* RNNativeAdView.m */,
+				3860709A25DBD9660009C491 /* RNNativeAdViewManager.h */,
+				386070A325DBD9660009C491 /* RNNativeAdViewManager.m */,
 				134814211AA4EA7D00B7C361 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -95,11 +146,18 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 58B511D21A9E6C8500147676;
 			productRefGroup = 58B511D21A9E6C8500147676;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 386070A825DBD9660009C491 /* Products */;
+					ProjectRef = 386070A725DBD9660009C491 /* RNMopubSdk.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				58B511DA1A9E6C8500147676 /* RNMopubSdk */,
@@ -112,7 +170,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				386070B625DBD9660009C491 /* RNMoPubBannerManager.m in Sources */,
 				B3E7B58A1CC2AC0600A0062D /* RNMopubSdk.m in Sources */,
+				386070B125DBD9660009C491 /* RNMoPubRewardedVideo.m in Sources */,
+				386070B325DBD9660009C491 /* RNNativeAdViewManager.m in Sources */,
+				386070B525DBD9660009C491 /* RNMoPubBanner.m in Sources */,
+				386070B425DBD9660009C491 /* RNMoPubInterstitial.m in Sources */,
+				386070AF25DBD9660009C491 /* AdLibSDK.m in Sources */,
+				386070B025DBD9660009C491 /* RNMopubSdk.m in Sources */,
+				386070B225DBD9660009C491 /* RNNativeAdView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -216,7 +282,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				HEADER_SEARCH_PATHS = (
-				"$(inherited)",
+					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../../../React/**",
 					"$(SRCROOT)/../../react-native/React/**",

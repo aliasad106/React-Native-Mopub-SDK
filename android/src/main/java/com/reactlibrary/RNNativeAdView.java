@@ -5,7 +5,7 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import javax.annotation.Nullable;
@@ -40,7 +40,7 @@ import java.util.EnumSet;
  * Created by usamaazam on 03/04/2019.
  */
 
-public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNativeNetworkListener {
+public class RNNativeAdView extends RelativeLayout implements MoPubNative.MoPubNativeNetworkListener {
 
     ReactContext mContext;
 
@@ -55,8 +55,8 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
 
     public void updateBounds(int width, int height) {
         int factor = (int) mContext.getResources().getDisplayMetrics().density;
-        FrameLayout layout = findViewById(R.id.native_ad_view);
-        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(width * factor, height * factor);
+        RelativeLayout layout = findViewById(R.id.native_ad_list_view);
+        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(width * factor, height * factor);
         layout.setLayoutParams(params);
     }
 
@@ -113,11 +113,19 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
         
         // Mopub rendered
         MoPubStaticNativeAdRenderer moPubStaticNativeAdRenderer = new MoPubStaticNativeAdRenderer(
-            new ViewBinder.Builder(R.layout.native_ads)
+            new ViewBinder.Builder(R.layout.native_ads_list)
+            .iconImageId(R.id.native_icon_image)
+            .titleId(R.id.native_title)
+            .textId(R.id.native_text)
+            .privacyInformationIconImageId(R.id.native_privacy_information_icon_image)
             .build());
         // Google rendered
         final GooglePlayServicesAdRenderer googlePlayServicesAdRenderer = new GooglePlayServicesAdRenderer(
-            new GooglePlayServicesViewBinder.Builder(R.layout.native_ads)
+            new GooglePlayServicesViewBinder.Builder(R.layout.native_ads_list)
+            .iconImageId(R.id.native_icon_image)
+            .titleId(R.id.native_title)
+            .textId(R.id.native_text)
+            .privacyInformationIconImageId(R.id.native_privacy_information_icon_image)
             .build());
 
         // Mopub has to be last
@@ -142,40 +150,45 @@ public class RNNativeAdView extends FrameLayout implements MoPubNative.MoPubNati
 
     @Override
     public void onNativeLoad(NativeAd nativeAd) {
-        StaticNativeAd staticNativeAd = (StaticNativeAd) nativeAd.getBaseNativeAd();
-        String title = staticNativeAd.getTitle();
-        String mainText = staticNativeAd.getText();
-        String callToActionText = staticNativeAd.getCallToAction();
-        String mainImageSource = staticNativeAd.getMainImageUrl();
-        String iconImageSource = staticNativeAd.getIconImageUrl();
-        String privacyIconImageSource = staticNativeAd.getPrivacyInformationIconImageUrl();
-
-        if (privacyIconImageSource == null) {
-            privacyIconImageSource = "asset:/images/mopub_privacy_icon.png";
-        }
-
-        WritableMap event = Arguments.createMap();
-        event.putString("title", title);
-        event.putString("mainText", mainText);
-        event.putString("callToActionText", callToActionText);
-        event.putString("mainImageSource", mainImageSource);
-        event.putString("iconImageSource", iconImageSource);
-        event.putString("privacyIconImageSource", privacyIconImageSource);
-
         AdapterHelper adapterHelper = new AdapterHelper(mContext.getCurrentActivity(), 0, 3);
+        
         // Retrieve the pre-built ad view that AdapterHelper prepared for us.
-        View v = adapterHelper.getAdView(null, this, nativeAd, new ViewBinder.Builder(0).build());
+        final View v = adapterHelper.getAdView(null, this, nativeAd, new ViewBinder.Builder(0).build());
+        
         // Set the native event listeners (onImpression, and onClick).
         nativeAd.setMoPubNativeEventListener(moPubNativeEventListener);
+
+        v.post(new Runnable() {
+        @Override
+        public void run() {
+            v.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
+            int height = v.getMeasuredHeight();
+            int width = v.getMeasuredWidth();
+            
+            Log.i("ILRD", "HEIGHT "+ height);
+            Log.i("ILRD", "WIDTH "+ width);
+            
+            WritableMap event = Arguments.createMap();
+            event.putInt("height", height);
+            event.putInt("width", width);
+
+            ReactContext reactContext = (ReactContext) getContext();
+            reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+                getId(),
+                "onAdLayout",
+                event);
+        }
+});
 
         // Add the ad view to our view hierarchy
         super.addView(v);
 
+        WritableMap event = Arguments.createMap();
         ReactContext reactContext = (ReactContext) getContext();
         reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                getId(),
-                "onNativeAdLoaded",
-                event);
+            getId(),
+            "onNativeAdLoaded",
+            event);
     }
 
     @Override
