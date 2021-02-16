@@ -31,15 +31,8 @@
                     <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" fixedFrame="YES" text="" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-BZ-rLh" userLabel="Title">
-                    <rect key="frame" x="72" y="27" width="23" height="0.0"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="775" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-zo-i5Q" userLabel="Main Text">
-                    <rect key="frame" x="82" y="42" width="276" height="100"/>
+                    <rect key="frame" x="82" y="60" width="276" height="82"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <string key="text">Et voluptatibus soluta qui quas rerum qui illum veritatis qui voluptates iure et sunt provident. Id debitis dolorum aut quibusdam dolorem qui fuga odio necessitatibus internos qui impedit consectetur.</string>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -60,19 +53,31 @@
                         <constraint firstAttribute="height" constant="50" id="eXI-ee-pfL"/>
                     </constraints>
                 </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" text="" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-BZ-rLh" userLabel="Title">
+                    <rect key="frame" x="82" y="42" width="268" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="18" id="hhk-nX-DNl"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="kC5-zo-i5Q" secondAttribute="trailing" constant="8" id="0pp-de-yDT"/>
                 <constraint firstItem="MNF-vY-kIl" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="1FJ-fz-PhM"/>
-                <constraint firstItem="kC5-zo-i5Q" firstAttribute="top" secondItem="fwx-K8-RZ2" secondAttribute="bottom" constant="8" id="2KZ-Pa-gwc"/>
                 <constraint firstAttribute="bottom" secondItem="kC5-zo-i5Q" secondAttribute="bottom" constant="8" id="4os-wR-Jei"/>
+                <constraint firstItem="rpQ-BZ-rLh" firstAttribute="leading" secondItem="3mQ-Z9-Ozc" secondAttribute="trailing" constant="16" id="DiZ-XF-DHE"/>
+                <constraint firstItem="rpQ-BZ-rLh" firstAttribute="top" secondItem="fwx-K8-RZ2" secondAttribute="bottom" constant="8" id="DtR-lD-lh9"/>
                 <constraint firstItem="MNF-vY-kIl" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="Eqg-Kc-WqC"/>
                 <constraint firstItem="fwx-K8-RZ2" firstAttribute="leading" secondItem="MNF-vY-kIl" secondAttribute="trailing" constant="8" symbolic="YES" id="IoB-g6-p5g"/>
                 <constraint firstItem="3mQ-Z9-Ozc" firstAttribute="top" secondItem="fwx-K8-RZ2" secondAttribute="bottom" constant="8" symbolic="YES" id="ONJ-uc-inq"/>
                 <constraint firstItem="3mQ-Z9-Ozc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="16" id="V9x-0Y-HAY"/>
+                <constraint firstAttribute="trailing" secondItem="rpQ-BZ-rLh" secondAttribute="trailing" constant="16" id="cl7-uC-f3A"/>
                 <constraint firstItem="fwx-K8-RZ2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="16" id="hhG-sI-J2B"/>
                 <constraint firstItem="kC5-zo-i5Q" firstAttribute="leading" secondItem="3mQ-Z9-Ozc" secondAttribute="trailing" constant="16" id="rgm-G1-Ycc"/>
+                <constraint firstItem="kC5-zo-i5Q" firstAttribute="top" secondItem="rpQ-BZ-rLh" secondAttribute="bottom" id="xdn-ZD-DpF"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="340.80000000000001" y="-650.37481259370315"/>
