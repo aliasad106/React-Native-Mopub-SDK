@@ -19,9 +19,9 @@
     return self;
 }
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)coder
 {
-    self = [super initWithCoder:aDecoder];
+    self = [super initWithCoder:coder];
     if (self) {
         [self customInit];
     }
@@ -41,7 +41,7 @@
 {
     [[NSBundle mainBundle] loadNibNamed:@"NativeAdListView" owner:self options:nil];
     [self addSubview:self.contentView];
-    self.contentView.frame = self.bounds;
+//    self.contentView.frame = self.bounds;
 }
 
 - (void)setAdUnitId:(NSString *)adUnitId {
@@ -62,28 +62,23 @@
         if (error) {
             self.onNativeAdFailed(@{@"error":error.localizedDescription});
         } else {
+            self.onNativeAdLoaded(@{@"height": [NSString stringWithFormat:@"%.2f", self.contentView.frame.size.height], @"width": [NSString stringWithFormat:@"%.2f", self.contentView.frame.size.width]});
+
             self.mpNativeAd = response;
-            
-            NSDictionary *data = [response properties];
-            
-            NSString *title =  data[@"title"] ? data[@"title"] : @"";
-            NSString *mainText =  data[@"text"] ? data[@"text"] : @"";
-            NSString *callToActionText =  data[@"ctatext"] ? data[@"ctatext"] : @"";
-            NSString *mainImageSource =  data[@"mainimage"] ? data[@"mainimage"] : @"";
-            NSString *privacyIconImageSource =  data[@"privacyicon"] ? data[@"privacyicon"] : @"";
-            NSString *iconImageSource =  data[@"iconimage"] ? data[@"iconimage"] : @"";
-            
-            self.onNativeAdLoaded(@{@"title":title, @"mainText": mainText, @"callToActionText":callToActionText,@"mainImageSource":mainImageSource, @"privacyIconImageSource":privacyIconImageSource,@"iconImageSource":iconImageSource});
-            
             self.mpNativeAd.delegate = self;
             
             UIView *nativeAdView = [response retrieveAdViewWithError:nil];
             nativeAdView.tag = 123456;
+
+            NSLog(@"Mopub xib content frame %f", self.contentView.bounds.size.height);
+            NSLog(@"Mopub xib content bounds %f", self.contentView.frame.size.height);
+            NSLog(@"Mopub xib frame %f", self.frame.size.height);
+            NSLog(@"Mopub xib bounds %f", self.bounds.size.height);
+            NSLog(@"Mopub xib NA bounds %f", nativeAdView.bounds.size.height);
+            NSLog(@"Mopub xib NA frame %f", nativeAdView.frame.size.height);
             
-            [self setFrame:CGRectMake(0, 0, self.frame.size.width, 50)];
-            [nativeAdView setBounds:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-            [nativeAdView setFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-           
+            nativeAdView.frame = self.bounds;
+            // [nativeAdView layoutIfNeeded];
             [self addSubview:nativeAdView];
         }
     }];
@@ -128,5 +123,26 @@
             _onImpressionData(@{@"impressionData": impressionObject});
     }
 }
+
+//- (UILabel *)nativeMainTextLabel
+//{
+//    return self.mainTextLabel;
+//}
+
+- (UILabel *)nativeTitleTextLabel
+{
+    return self.titleLabel;
+}
+
+- (UIImageView *)nativeIconImageView
+{
+    return self.iconImageView;
+}
+
+- (UIImageView *)nativePrivacyInformationIconImageView
+{
+    return self.privacyInformationIconImageView;
+}
+
 
 @end

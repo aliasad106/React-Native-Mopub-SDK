@@ -7,64 +7,70 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NativeAdView" customModule="Canary" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RNNativeAdView">
             <connections>
-                <outlet property="contentView" destination="iN0-l3-epB" id="6oJ-0P-hF9"/>
+                <outlet property="contentView" destination="iN0-l3-epB" id="eWL-6c-Kr0"/>
                 <outlet property="iconImageView" destination="0al-UH-P79" id="zdZ-4Y-1qO"/>
-                <outlet property="mainImage" destination="0al-UH-P79" id="6ni-97-FV2"/>
                 <outlet property="mainTextLabel" destination="kC5-zo-i5Q" id="OfV-Ct-ADj"/>
-                <outlet property="privacy" destination="fwx-K8-RZ2" id="k45-Vf-Bmd"/>
                 <outlet property="privacyInformationIconImageView" destination="fwx-K8-RZ2" id="o9b-oE-jml"/>
-                <outlet property="sponsoredByLabel" destination="MNF-vY-kIl" id="Hp7-mT-Guv"/>
+                <outlet property="sponsoredByLabel" destination="MNF-vY-kIl" id="hxh-NO-9y8"/>
                 <outlet property="titleLabel" destination="rpQ-BZ-rLh" id="xzz-vu-F5h"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="RNNativeAdView">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="366" height="150"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sponsored by MoPub" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNF-vY-kIl">
-                    <rect key="frame" x="-182" y="-6" width="301" height="37"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Sponsored" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MNF-vY-kIl">
+                    <rect key="frame" x="0.0" y="4.5" width="57" height="13.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" fixedFrame="YES" text="Title" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-BZ-rLh" customClass="PreferredWidthLabel" customModule="Canary" customModuleProvider="target">
-                    <rect key="frame" x="74" y="29" width="301" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="800" text="" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rpQ-BZ-rLh" userLabel="Title">
+                    <rect key="frame" x="72" y="27" width="23" height="0.0"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0al-UH-P79" userLabel="Icon Image View">
+                    <rect key="frame" x="0.0" y="27" width="64" height="64"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleTitle3"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="775" fixedFrame="YES" text="Multiline main text" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-zo-i5Q" customClass="PreferredWidthLabel" customModule="Canary" customModuleProvider="target">
-                    <rect key="frame" x="74" y="55" width="301" height="83.5"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0al-UH-P79" userLabel="Icon Image View">
-                    <rect key="frame" x="8" y="29" width="50" height="50"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="BmJ-xp-DTf"/>
-                        <constraint firstAttribute="width" secondItem="0al-UH-P79" secondAttribute="height" multiplier="1:1" id="PTe-Yo-UEF"/>
-                    </constraints>
                 </imageView>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fwx-K8-RZ2">
-                    <rect key="frame" x="127" y="3" width="18" height="18"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="775" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kC5-zo-i5Q" userLabel="Main Text">
+                    <rect key="frame" x="72" y="27" width="219" height="64"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <string key="text">Et voluptatibus soluta qui quas rerum qui illum veritatis qui voluptates iure et sunt provident. Id debitis dolorum aut quibusdam dolorem qui fuga odio necessitatibus internos qui impedit consectetur.</string>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fwx-K8-RZ2">
+                    <rect key="frame" x="61" y="0.0" width="18" height="18"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="18" id="b7f-tK-Ld8"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="0al-UH-P79" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="4Z4-JV-MeN"/>
-                <constraint firstItem="0al-UH-P79" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="8" id="fGj-gK-MSf"/>
+                <constraint firstItem="fwx-K8-RZ2" firstAttribute="leading" secondItem="MNF-vY-kIl" secondAttribute="trailing" constant="7" id="16A-yp-PYx"/>
+                <constraint firstItem="rpQ-BZ-rLh" firstAttribute="leading" secondItem="0al-UH-P79" secondAttribute="trailing" constant="8" symbolic="YES" id="1uc-eq-MAe"/>
+                <constraint firstItem="kC5-zo-i5Q" firstAttribute="leading" secondItem="0al-UH-P79" secondAttribute="trailing" constant="8" symbolic="YES" id="5jn-pC-B5t"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kC5-zo-i5Q" secondAttribute="trailing" constant="75" id="RTT-uA-qop"/>
+                <constraint firstItem="rpQ-BZ-rLh" firstAttribute="leading" secondItem="0al-UH-P79" secondAttribute="trailing" constant="8" id="ao3-Mx-TjI"/>
+                <constraint firstItem="kC5-zo-i5Q" firstAttribute="bottom" secondItem="0al-UH-P79" secondAttribute="bottom" id="b8E-wa-i7p"/>
+                <constraint firstItem="rpQ-BZ-rLh" firstAttribute="top" secondItem="0al-UH-P79" secondAttribute="top" id="d1b-Br-E5J"/>
+                <constraint firstItem="kC5-zo-i5Q" firstAttribute="top" secondItem="rpQ-BZ-rLh" secondAttribute="bottom" id="dAa-1p-bfT"/>
+                <constraint firstItem="kC5-zo-i5Q" firstAttribute="leading" secondItem="0al-UH-P79" secondAttribute="trailing" constant="8" symbolic="YES" id="jhm-jP-epM"/>
+                <constraint firstItem="rpQ-BZ-rLh" firstAttribute="leading" secondItem="kC5-zo-i5Q" secondAttribute="leading" id="lP6-5f-ncQ"/>
+                <constraint firstItem="fwx-K8-RZ2" firstAttribute="centerY" secondItem="MNF-vY-kIl" secondAttribute="centerY" id="sMA-72-u31"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="rpQ-BZ-rLh" secondAttribute="trailing" constant="271" id="xlb-np-Rav"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="9" y="-143"/>
+            <point key="canvasLocation" x="340.80000000000001" y="-650.37481259370315"/>
         </view>
     </objects>
 </document>
