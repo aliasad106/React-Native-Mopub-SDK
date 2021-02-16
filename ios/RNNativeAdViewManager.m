@@ -44,14 +44,4 @@ RCT_EXPORT_VIEW_PROPERTY(onWillLeaveApplicationFromNativeAd, RCTBubblingEventBlo
 RCT_EXPORT_VIEW_PROPERTY(onDidDismissModalForNativeAd, RCTBubblingEventBlock);
 RCT_EXPORT_VIEW_PROPERTY(onImpressionData, RCTBubblingEventBlock);
 
-RCT_EXPORT_METHOD(updateBounds:(nonnull NSNumber*) reactTag withWidth:(NSString *) width andHeight:(NSString *) height) {
-    [self.bridge.uiManager addUIBlock:^(RCTUIManager *uiManager, NSDictionary<NSNumber *,UIView *> *viewRegistry) {
-        RNNativeAdView *view = viewRegistry[reactTag];
-        if (!view || ![view isKindOfClass:[RNNativeAdView class]]) {
-            RCTLogError(@"Cannot find NativeView with tag #%@", reactTag);
-            return;
-        }
-        [view updateBounds:width andHeight:height];
-    }];
-}
 @end
