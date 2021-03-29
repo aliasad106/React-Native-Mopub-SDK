@@ -53,13 +53,13 @@ public class AdLibSDK extends ReactContextBaseJavaModule {
                         .build();
 
                 MoPub.initializeSdk(getCurrentActivity(), sdkConfiguration, initSdkListener());
-
             }
 
             private SdkInitializationListener initSdkListener() {
                 return new SdkInitializationListener() {
                     @Override
                     public void onInitializationFinished() {
+                        MoPub.getPersonalInformationManager().grantConsent();
                         sendEvent(EVENT_SDK_INITIALIZED, null);
                     }
                 };
