@@ -33,5 +33,8 @@ Pod::Spec.new do |s|
     s.subspec "AdMob" do |ss|
         ss.dependency 'MoPub-AdMob-Adapters', '~> 7.68.0.2'
     end
+    s.subspec "FacebookAudienceNetwork" do |ss|
+        ss.dependency 'MoPub-FacebookAudienceNetwork-Adapters', '~> 6.2.1.0'
+    end
 end
 

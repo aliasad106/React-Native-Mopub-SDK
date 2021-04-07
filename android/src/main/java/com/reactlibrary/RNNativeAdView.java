@@ -17,6 +17,7 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 import com.facebook.react.views.view.ReactViewGroup;
 
+import com.mopub.nativeads.FacebookAdRenderer;
 import com.mopub.nativeads.GooglePlayServicesAdRenderer;
 import com.mopub.nativeads.GooglePlayServicesViewBinder;
 import com.mopub.nativeads.AdapterHelper;
@@ -127,8 +128,18 @@ public class RNNativeAdView extends RelativeLayout implements MoPubNative.MoPubN
             .textId(R.id.native_text)
             .privacyInformationIconImageId(R.id.native_privacy_information_icon_image)
             .build());
+        FacebookAdRenderer facebookAdRenderer = new FacebookAdRenderer(
+        new FacebookAdRenderer.FacebookViewBinder.Builder(R.layout.native_ads_list)
+          .titleId(R.id.native_title)
+          .textId(R.id.native_text)
+          // Binding to new layouts from Facebook 4.99.0+
+          .adIconViewId(R.id.native_icon_image)
+          .adChoicesRelativeLayoutId(R.id.native_privacy_information_icon_image)
+          .advertiserNameId(R.id.native_title) // Bind either the titleId or advertiserNameId depending on the FB SDK version
+          .build());
 
         // Mopub has to be last
+        moPubNative.registerAdRenderer(facebookAdRenderer);
         moPubNative.registerAdRenderer(googlePlayServicesAdRenderer);
         moPubNative.registerAdRenderer(moPubStaticNativeAdRenderer);
 
