@@ -16,8 +16,8 @@ import com.facebook.react.bridge.WritableNativeMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.mopub.common.MoPubReward;
 import com.mopub.mobileads.MoPubErrorCode;
-import com.mopub.mobileads.MoPubRewardedVideoListener;
-import com.mopub.mobileads.MoPubRewardedVideos;
+import com.mopub.mobileads.MoPubRewardedAdListener;
+import com.mopub.mobileads.MoPubRewardedAds;
 import com.mopub.network.ImpressionData;
 import com.mopub.network.ImpressionsEmitter;
 import com.mopub.network.ImpressionListener;
@@ -33,7 +33,7 @@ import javax.annotation.Nullable;
  * Created by usamaazam on 30/03/2019.
  */
 
-public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements MoPubRewardedVideoListener {
+public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements MoPubRewardedAdListener {
 
     ReactApplicationContext mReactContext;
 
@@ -45,7 +45,7 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     public static final String ON_REWARDED_VIDEO_LOAD_SUCCESS = "onRewardedVideoLoadSuccess";
     public static final String ON_REWARDED_VIDEO_LOAD_FAILURE = "onRewardedVideoLoadFailure";
     public static final String ON_REWARDED_VIDEO_STARTED = "onRewardedVideoStarted";
-    public static final String ON_REWARDED_VIDEO_PLAYBACK_ERROR = "onRewardedVideoPlaybackError";
+    public static final String ON_REWARDED_VIDEO_SHOW_ERROR = "onRewardedVideoShowError";
     public static final String ON_REWARDED_VIDEO_CLOSED = "onRewardedVideoClosed";
     public static final String ON_REWARDED_VIDEO_COMPLETED = "onRewardedVideoCompleted";
     public static final String ON_REWARDED_VIDEO_CLICKED = "onRewardedVideoClicked";
@@ -101,20 +101,20 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
 
         activity.runOnUiThread(new Runnable() {
             @Override public void run() {
-                MoPubRewardedVideos.loadRewardedVideo(unitID);
-                MoPubRewardedVideos.setRewardedVideoListener(listener);
+                MoPubRewardedAds.loadRewardedAd(unitID);
+                MoPubRewardedAds.setRewardedAdListener(listener);
             }
         });
     }
 
     @ReactMethod
     public void showRewardedVideoWithUnitID(String unitID, Callback onError) {
-        Boolean hasRewarded = MoPubRewardedVideos.hasRewardedVideo(unitID);
+        Boolean hasRewarded = MoPubRewardedAds.hasRewardedAd(unitID);
         try {
             JSONObject dictionary = new JSONObject();	
 
             if (hasRewarded) {
-                MoPubRewardedVideos.showRewardedVideo(unitID);
+                MoPubRewardedAds.showRewardedAd(unitID);
                 dictionary.put("error", false);
             } else {
                 dictionary.put("error", "Ad not found for this unit ID");
@@ -127,12 +127,12 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @Override
-    public void onRewardedVideoLoadSuccess(String adUnitId) {
+    public void onRewardedAdLoadSuccess(String adUnitId) {
         sendEvent(ON_REWARDED_VIDEO_LOAD_SUCCESS, null);
     }
 
     @Override
-    public void onRewardedVideoLoadFailure(String adUnitId, MoPubErrorCode errorCode) {
+    public void onRewardedAdLoadFailure(String adUnitId, MoPubErrorCode errorCode) {
 
         HashMap<String, String> hm = new HashMap<>();
         hm.put("error", errorCode.toString());
@@ -146,13 +146,27 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @Override
-    public void onRewardedVideoClosed(String adUnitId) {
+    public void onRewardedAdShowError(String adUnitId, MoPubErrorCode errorCode) {
+
+        HashMap<String, String> hm = new HashMap<>();
+        hm.put("error", errorCode.toString());
+
+        WritableMap map = new WritableNativeMap();
+        for (Map.Entry<String, String> entry : hm.entrySet()) {
+            map.putString(entry.getKey(), entry.getValue());
+        }
+
+        sendEvent(ON_REWARDED_VIDEO_SHOW_ERROR, map);
+    }
+
+    @Override
+    public void onRewardedAdClosed(String adUnitId) {
         sendEvent(ON_REWARDED_VIDEO_CLOSED, null);
 
     }
 
     @Override
-    public void onRewardedVideoCompleted(Set<String> adUnitIds, MoPubReward reward) {
+    public void onRewardedAdCompleted(Set<String> adUnitIds, MoPubReward reward) {
         HashMap<String, String> hm = new HashMap<>();
         hm.put("amount", String.valueOf(reward.getAmount()));
         hm.put("currencyType", String.valueOf(reward.getLabel()));
@@ -165,25 +179,12 @@ public class RNMoPubRewardedVideo extends ReactContextBaseJavaModule implements 
     }
 
     @Override
-    public void onRewardedVideoStarted(String adUnitId) {
+    public void onRewardedAdStarted(String adUnitId) {
         sendEvent(ON_REWARDED_VIDEO_STARTED, null);
     }
 
     @Override
-    public void onRewardedVideoPlaybackError(String adUnitId, MoPubErrorCode errorCode) {
-        HashMap<String, String> hm = new HashMap<>();
-        hm.put("error", errorCode.toString());
-
-        WritableMap map = new WritableNativeMap();
-        for (Map.Entry<String, String> entry : hm.entrySet()) {
-            map.putString(entry.getKey(), entry.getValue());
-        }
-
-        sendEvent(ON_REWARDED_VIDEO_PLAYBACK_ERROR, null);
-    }
-
-    @Override
-    public void onRewardedVideoClicked(@NonNull String adUnitId) {
+    public void onRewardedAdClicked(@NonNull String adUnitId) {
         sendEvent(ON_REWARDED_VIDEO_CLICKED, null);
     }
 }
