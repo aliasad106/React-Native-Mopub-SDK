@@ -25,12 +25,12 @@
   "peerDependencies": {
     "react": "16.2.0",
     "react-native": "^0.52.0",
-    "react-native-windows": "0.52.0"
+    "react-native-windows": "0.70.2"
   },
   "devDependencies": {
     "metro-react-native-babel-preset": "^0.53.1",
     "react": "16.2.0",
     "react-native": "^0.52.0",
-    "react-native-windows": "0.52.0"
+    "react-native-windows": "0.70.2"
   }
 }
